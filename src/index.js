@@ -53,6 +53,30 @@ const cards = [
   { suit: 'Spades', value: 'A' }
 ]
 
+window.addEventListener("load", () => {
+  const container = document.getElementById("bj-board");
+
+  // Mezclar las cartas aqui y pasarlas ya mezcladas
+ function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array
+ }
+  let numero_de_barajas = 6
+  let totalCards = []
+  for (let i = 0; i <= numero_de_barajas-1; i++) {
+    const cardsShuffled = shuffleArray(cards)
+    totalCards.push(cardsShuffled)
+  }
+
+  console.log(totalCards)
+
+  const game = new Game(totalCards, container);
+  game.start();
+});
+
 /*
 Se me ha ocurrido que lo primero que podemos ir haciendo es definiendo unos botones que esten linkeados
 con los scripts de js y que vayan haciendo algunas funciones:

@@ -1,8 +1,7 @@
 class Player {
     constructor(container) {
         this.container = container
-        // El cash lo controla el juego, cuando se inicia la instancia de jugador
-        this.cash = 100
+        this.cash = 100 // always start with the same amount of cash
     }
 
     apostar(bet) {

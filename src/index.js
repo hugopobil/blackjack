@@ -59,20 +59,18 @@ window.addEventListener("load", () => {
   const container = document.getElementById("bj-board");
 
   // Mezclar las cartas aqui y pasarlas ya mezcladas
- function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
   }
-  return array
- }
 
- // TODO: Crear una funcion que con una variable de numero de barajas cree un solo array con todas
-  let totalCards = shuffleArray(cards)
-      .concat(shuffleArray(cards), shuffleArray(cards), shuffleArray(cards))
+  let totalCards = shuffleArray(cards).concat(shuffleArray(cards), shuffleArray(cards), shuffleArray(cards))
 
   // comprobar que las cartas se han cargado bien
-  console.log(totalCards)
+  console.log(`Decks in game (${totalCards.length / 52}):`, totalCards)
 
   const game = new Game(totalCards, container);
   game.start();

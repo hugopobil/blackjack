@@ -11,6 +11,8 @@ body {
   overflow: hidden;
   width: 1000px;
   height: 700px;
-  background-color: black;
+  background: url("../img/fondo-juego.jpeg") no-repeat;
+  background-size: cover;
+  filter: blur(2px);
   position: relative;
 }

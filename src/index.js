@@ -53,6 +53,8 @@ const cards = [
   { suit: 'Spades', value: 'A' }
 ]
 
+// con esto damos inicio al juego, cuando se carga la pagina:
+// Barajar cartas y pasarselas al juego
 window.addEventListener("load", () => {
   const container = document.getElementById("bj-board");
 
@@ -64,26 +66,14 @@ window.addEventListener("load", () => {
   }
   return array
  }
-  let numero_de_barajas = 6
-  let totalCards = []
-  for (let i = 0; i <= numero_de_barajas-1; i++) {
-    const cardsShuffled = shuffleArray(cards)
-    totalCards.push(cardsShuffled)
-  }
 
+ // TODO: Crear una funcion que con una variable de numero de barajas cree un solo array con todas
+  let totalCards = shuffleArray(cards)
+      .concat(shuffleArray(cards), shuffleArray(cards), shuffleArray(cards))
+
+  // comprobar que las cartas se han cargado bien
   console.log(totalCards)
 
   const game = new Game(totalCards, container);
   game.start();
 });
-
-/*
-Se me ha ocurrido que lo primero que podemos ir haciendo es definiendo unos botones que esten linkeados
-con los scripts de js y que vayan haciendo algunas funciones:
-
-1. Boton de merclar:
-2. Seleccionar el numero de barajas --> Funcion que guarde en una array todas las barajas según el numero,
-y que cada vez que cambie el numero se vuelvan a meter
- */
-
-

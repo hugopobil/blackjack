@@ -7,25 +7,20 @@ Esta clase va a controlar el juego entero,
 class Game {
     constructor(cards, container) {
         this.container = container
+        // this.background = new Background(this.container);
+        this.player = new Player(this.container);
+        this.dealer = new Dealer(this.container);
         this.cards = cards
-        this.dealer_money = 1000
-        // De momento todos empiezan con 100 de cash
-        this.player_money = 100
+        this.bets = 0
     }
-    // TODO: Se crea a partir de un boton de inicio del juego
-    // TODO: Diseñar una pantalla de inicio, simple
 
     start() {
+       const backgroundMusic = document.getElementById('background-music');
 
-        // Barajar las cartas
-
-
-
-        // Utilizamos este intervalo para crear los frames por segundo, incluimos el metodo update
-        setInterval(() => {
-        }, 1000 / 24);
-
-
+       // ruidos de fondo de casino, ya tenemos el ambiente del juego
+       setInterval(() => {
+           backgroundMusic.play()
+       }, 60000 * 3)
     }
 
 }

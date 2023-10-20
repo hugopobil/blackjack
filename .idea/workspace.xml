@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b6995b0-2ed0-43cd-8aff-bbdf5be633fc" name="Changes" comment="initial push">
+    <list default="true" id="3b6995b0-2ed0-43cd-8aff-bbdf5be633fc" name="Changes" comment="creator message and menu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cards.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/player.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/player.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +58,7 @@
       <workItem from="1697747823498" duration="250000" />
       <workItem from="1697748083270" duration="323000" />
       <workItem from="1697748450829" duration="1258000" />
-      <workItem from="1697749721932" duration="9223000" />
+      <workItem from="1697749721932" duration="13498000" />
     </task>
     <task id="LOCAL-00001" summary="initial push">
       <option name="closed" value="true" />
@@ -97,7 +92,23 @@
       <option name="project" value="LOCAL" />
       <updated>1697786166237</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="initial push">
+      <option name="closed" value="true" />
+      <created>1697820087538</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1697820087538</updated>
+    </task>
+    <task id="LOCAL-00006" summary="creator message and menu">
+      <option name="closed" value="true" />
+      <created>1697830879115</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1697830879115</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,6 +127,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial push" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial push" />
+    <MESSAGE value="creator message and menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="creator message and menu" />
   </component>
 </project>

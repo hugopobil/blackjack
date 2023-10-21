@@ -28,17 +28,17 @@ class Game {
             element.className = class_name;
             element.textContent = name;
             element.style.position = position;
-            element.style.width = `300px`;
-            element.style.height = `300px`;
+            element.style.width = `auto`;
+            element.style.height = `auto`;
             element.style.color = "white";
             element.style.fontSize = "30px";
             element.style.left = `100px`;
             element.style.top = `${index*100}px`;
         }
 
-        create_div_start_menu(startMessage, "new-game-start", "NEW GAME", "absolute", 1)
-        create_div_start_menu(howtoplayMessage, "how-to-play", "HOW TO PLAY", "absolute", 2)
-        create_div_start_menu(exitMessage, "settings", "EXIT", "absolute", 3)
+        create_div_start_menu(startMessage,  "menu-new-game-start", "NEW GAME", "absolute", 1)
+        create_div_start_menu(howtoplayMessage, "menu-how-to-play", "HOW TO PLAY", "absolute", 2)
+        create_div_start_menu(exitMessage, "menu-settings", "EXIT", "absolute", 3)
 
         creatorMessage.className = "creators-div"
         creatorMessage.textContent = "Created by Paula & Hugo"
@@ -48,20 +48,14 @@ class Game {
         creatorMessage.style.top = `670px`;
         creatorMessage.style.color = `white`;
 
-
-
         this.container.appendChild(howtoplayMessage)
         this.container.appendChild(startMessage)
         this.container.appendChild(exitMessage)
         this.container.appendChild(creatorMessage)
 
 
-        // const backgroundMusic = document.getElementById('background-music');
-        // backgroundMusic.play()
-
-       // setInterval(() => {
-       //     backgroundMusic.play()
-       // }, 60000 * 3)
+        const backgroundMusic = document.getElementById('background-music');
+        setInterval(() => {backgroundMusic.play()}, 0)
     }
 
 

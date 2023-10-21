@@ -67,7 +67,9 @@ window.addEventListener("load", () => {
     return array
   }
 
-  let totalCards = shuffleArray(cards).concat(shuffleArray(cards), shuffleArray(cards), shuffleArray(cards))
+  // 6 barajas que es el standard en el blackjack
+  let totalCards = shuffleArray(cards)
+      .concat(shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards))
 
   // comprobar que las cartas se han cargado bien
   console.log(`Decks in game (${totalCards.length / 52}):`, totalCards)

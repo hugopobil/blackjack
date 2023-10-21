@@ -53,7 +53,6 @@ class Game {
         this.container.appendChild(exitMessage)
         this.container.appendChild(creatorMessage)
 
-
         const backgroundMusic = document.getElementById('background-music');
         setInterval(() => {backgroundMusic.play()}, 0)
     }

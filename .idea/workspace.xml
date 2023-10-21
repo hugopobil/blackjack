@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b6995b0-2ed0-43cd-8aff-bbdf5be633fc" name="Changes" comment="creator message and menu">
+    <list default="true" id="3b6995b0-2ed0-43cd-8aff-bbdf5be633fc" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/game.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +58,7 @@
       <workItem from="1697747823498" duration="250000" />
       <workItem from="1697748083270" duration="323000" />
       <workItem from="1697748450829" duration="1258000" />
-      <workItem from="1697749721932" duration="13498000" />
+      <workItem from="1697749721932" duration="19231000" />
     </task>
     <task id="LOCAL-00001" summary="initial push">
       <option name="closed" value="true" />
@@ -108,7 +108,23 @@
       <option name="project" value="LOCAL" />
       <updated>1697830879115</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="un poco mas de diseño del fondo">
+      <option name="closed" value="true" />
+      <created>1697831751698</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1697831751698</updated>
+    </task>
+    <task id="LOCAL-00008" summary="update">
+      <option name="closed" value="true" />
+      <created>1697884802896</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1697884802896</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,6 +144,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial push" />
     <MESSAGE value="creator message and menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="creator message and menu" />
+    <MESSAGE value="un poco mas de diseño del fondo" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>

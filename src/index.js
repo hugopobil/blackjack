@@ -53,27 +53,55 @@ const cards = [
   { suit: 'Spades', value: 'A' }
 ]
 
+// Mezclar las cartas aqui y pasarlas ya mezcladas
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array
+}
+
 // con esto damos inicio al juego, cuando se carga la pagina:
 // Barajar cartas y pasarselas al juego
 window.addEventListener("load", () => {
   const container = document.getElementById("bj-board");
+  const newGameButton = document.createElement("button")
+  const howToPlayButton = document.createElement("button")
+  const welcomeMessage = document.createElement("div")
+  const quote = document.createElement("div")
 
-  // Mezclar las cartas aqui y pasarlas ya mezcladas
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array
-  }
+  welcomeMessage.textContent = "Wecomel to BlackJack!"
+  welcomeMessage.id = "welcome-message-intro"
 
-  // 6 barajas que es el standard en el blackjack
+  // TODO: Create random quotes
+  quote.textContent = new Quote().generate()
+  quote.id = "quote-intro"
+
+  newGameButton.textContent = "New Game"
+  newGameButton.className = "button-intro"
+  howToPlayButton.textContent = "First time here?"
+  howToPlayButton.className = "button-intro"
+
+  container.appendChild(welcomeMessage)
+  container.appendChild(quote)
+  container.appendChild(newGameButton)
+  container.appendChild(howToPlayButton)
+
   let totalCards = shuffleArray(cards)
       .concat(shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards))
 
-  // comprobar que las cartas se han cargado bien
-  console.log(`Decks in game (${totalCards.length / 52}):`, totalCards)
+  newGameButton.addEventListener("click" , () => {
+    const game = new Game(totalCards, container);
+    game.start();
+  })
 
-  const game = new Game(totalCards, container);
-  game.start();
+  howToPlayButton.addEventListener("click" , () => {
+    const howtoplay = new howToPlay(container)
+    welcomeMessage.remove()
+    quote.remove()
+    newGameButton.remove()
+    howToPlayButton.remove()
+    howtoplay.display()
+  })
 });

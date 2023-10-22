@@ -74,7 +74,6 @@ window.addEventListener("load", () => {
   welcomeMessage.textContent = "Wecomel to BlackJack!"
   welcomeMessage.id = "welcome-message-intro"
 
-  // TODO: Create random quotes
   quote.textContent = new Quote().generate()
   quote.id = "quote-intro"
 

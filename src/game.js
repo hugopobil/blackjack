@@ -4,7 +4,7 @@ class Game {
         this.player = new Player(this.container);
         this.dealer = new Dealer(this.container);
         this.bet = 0
-        this.cards = cards
+        this.cards = new Card (container)
         this.width = this.container.offsetWidth;
         this.height = this.container.offsetHeight;
         this.x = this.container.offsetWidth
@@ -12,9 +12,8 @@ class Game {
     }
 
     start() {
-        // comienza el juego de black jack
-        // El dealer te da la bienvenida
-        // this.dealer.welcome_message()
+        this.cards.generateCards('hearts', 5)
+
 
         // input for bets
         const numericInput = document.createElement("input");

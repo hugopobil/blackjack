@@ -92,6 +92,10 @@ window.addEventListener("load", () => {
 
   newGameButton.addEventListener("click" , () => {
     const game = new Game(totalCards, container);
+    welcomeMessage.remove()
+    quote.remove()
+    newGameButton.remove()
+    howToPlayButton.remove()
     game.start();
   })
 

@@ -69,6 +69,11 @@ body {
   font-family: "Andale Mono", sans-serif;
 }
 
+#bj-board .button-intro:hover {
+  background-color:green;
+  transition: 0.7s;
+}
+
 #instructions-title {
   color: white;
   font-size: 30px;
@@ -93,4 +98,9 @@ body {
   text-align: center;
   font-weight: lighter;
   font-family: "Andale Mono", sans-serif;
+}
+
+#bj-board #instructions-return-button:hover {
+  background-color:green;
+  transition: 0.7s;
 }

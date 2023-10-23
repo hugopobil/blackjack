@@ -71,7 +71,7 @@ window.addEventListener("load", () => {
   const welcomeMessage = document.createElement("div")
   const quote = document.createElement("div")
 
-  welcomeMessage.textContent = "Wecomel to BlackJack!"
+  welcomeMessage.textContent = "Welcome to BlackJack!"
   welcomeMessage.id = "welcome-message-intro"
 
   quote.textContent = new Quote().generate()
@@ -79,7 +79,7 @@ window.addEventListener("load", () => {
 
   newGameButton.textContent = "New Game"
   newGameButton.className = "button-intro"
-  howToPlayButton.textContent = "First time here?"
+  howToPlayButton.textContent = "Instructions"
   howToPlayButton.className = "button-intro"
 
   container.appendChild(welcomeMessage)

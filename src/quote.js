@@ -12,12 +12,10 @@ const luckQuotes = [
 ];
 
 class Quote {
-    constructor() {
-    }
+    constructor() {}
 
     generate() {
         let index = Math.floor(Math.random() * (luckQuotes.length + 1))
         return luckQuotes[index]
     }
-
 }

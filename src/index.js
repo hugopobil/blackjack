@@ -91,6 +91,10 @@ window.addEventListener("load", () => {
       .concat(shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards))
 
   newGameButton.addEventListener("click" , () => {
+    welcomeMessage.remove()
+    quote.remove()
+    newGameButton.remove()
+    howToPlayButton.remove()
     const game = new Game(totalCards, container);
     game.start();
   })

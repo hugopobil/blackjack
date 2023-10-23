@@ -34,7 +34,7 @@ body {
   font-size: 10px;
   padding: 0;
   margin: 0;
-  position:absolute;
+  position: absolute;
   font-family: "Andale Mono", sans-serif;
   top: 760px;
   left: 800px;
@@ -70,7 +70,7 @@ body {
 }
 
 #bj-board .button-intro:hover {
-  background-color:green;
+  background-color: green;
   transition: 0.7s;
 }
 
@@ -101,6 +101,60 @@ body {
 }
 
 #bj-board #instructions-return-button:hover {
-  background-color:green;
+  background-color: green;
   transition: 0.7s;
+}
+
+.card {
+  width: 220px;
+  height: 320px;
+  border: 1px solid #000;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+}
+
+.placeholder {
+  width:100%;
+  height:100%;
+  position: relative;
+}
+
+.suit {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.suit-small {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  top: 10%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+}
+
+.rank {
+  position: absolute;
+  height: auto;
+  width: auto;
+  font-size: 35px;
+  left: 15px;
+  top: 15px;
+}
+
+.bottom-right {
+  bottom: 15px;
+  right: 15px;
+  height: auto;
+  width: auto;
+  font-size: 35px;
+  position: absolute;
+  transform: rotate(180deg);
+  top: auto;
+  left: auto;
 }

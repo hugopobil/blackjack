@@ -16,7 +16,8 @@ body {
   overflow: hidden;
   width: 1000px;
   height: 700px;
-  /*background: url("../img/inicio.png") no-repeat;*/
+  background-image: url("../img/inicio.png");
+  background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   box-shadow: 20px 20px 10px black;
@@ -26,7 +27,6 @@ body {
   flex-direction: column;
   margin-top: 30px;
   justify-content: center;
-  background-color: darkgreen;
   border-radius: 20px;
 }
 

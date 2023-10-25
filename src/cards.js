@@ -11,7 +11,6 @@ class Card {
         const placeholder = document.createElement('div')
         placeholder.classList.add('placeholder')
 
-
         const suitImage = document.createElement('img');
         suitImage.classList.add('suit');
         suitImage.src = `./img/${suit}.png`;
@@ -22,24 +21,25 @@ class Card {
 
         const rankTextTop = document.createElement('div');
         rankTextTop.classList.add('rank');
-        rankTextTop.textContent = rank
+        const topNumber = document.createElement('div');
+        topNumber.textContent = rank;
+        rankTextTop.appendChild(topNumber)
 
         const rankTextBottom = document.createElement('div');
         rankTextBottom.classList.add('rank');
         rankTextBottom.classList.add('bottom-right');
-        const rankText = document.createElement('div');
-        rankText.classList.add('number')
-        rankText.textContent = rank;
-        rankTextBottom.appendChild(rankText)
+        const bottomNumber = document.createElement('div');
+        bottomNumber.textContent = rank;
+        rankTextBottom.appendChild(bottomNumber)
 
         if (suit === "hearts" || suit === "diamonds") {
-            rankTextTop.style.color = "red"
-            rankTextBottom.style.color = "red"
+            topNumber.style.color = "red"
+            bottomNumber.style.color = "red"
         }
 
         if (suit === "spades" || suit === "clubs") {
-            rankTextTop.style.color = "black"
-            rankTextBottom.style.color = "black"
+            topNumber.style.color = "black"
+            bottomNumber.style.color = "black"
         }
 
         rankTextTop.appendChild(suitImageSmall.cloneNode());

@@ -6,7 +6,7 @@ body {
   justify-content: center;
   font-family: "Andale Mono", sans-serif;
   font-weight: lighter;
-  background: url("../img/fondo-casino.jpeg") no-repeat;
+  background-color: black;
   background-size: 100% 100%;
   animation: gradient 15s ease infinite;
   flex-direction: column;
@@ -16,7 +16,7 @@ body {
   overflow: hidden;
   width: 1000px;
   height: 700px;
-  background: url("../img/fondo-juego.jpeg") no-repeat;
+  background: url("../img/inicio.png") no-repeat;
   background-size: cover;
   position: relative;
   box-shadow: 20px 20px 10px black;
@@ -166,6 +166,7 @@ body {
   font-size: 30px;
 }
 
+
 .card {
   width: 220px;
   height: 320px;
@@ -191,16 +192,18 @@ body {
 }
 
 .suit-small {
-  position: absolute;
   height: 30px;
   width: 30px;
   top: 10%;
   left: 10%;
-  transform: translate(-50%, -50%);
 }
 
 .rank {
-  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position:absolute;
+  text-align: center;
   height: auto;
   width: auto;
   font-size: 35px;
@@ -211,11 +214,9 @@ body {
 .bottom-right {
   bottom: 15px;
   right: 15px;
-  height: auto;
-  width: auto;
-  font-size: 35px;
-  position: absolute;
   transform: rotate(180deg);
   top: auto;
   left: auto;
 }
+
+

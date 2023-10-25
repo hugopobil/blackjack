@@ -230,6 +230,18 @@ body {
   display: flex;
   flex-direction: row;
   position: absolute;
+  width: 700px;
+  justify-content: space-around;
+  top: 600px;
+  right: 30px;
+}
+
+.chips {
+  border-radius: 50px;
+  height: 100px;
+  width: 100px;
+  box-shadow: 10px 10px 5px black;
+  font-size: 40px;
 }
 
 

@@ -70,12 +70,9 @@ class Game {
             let chipsbutton = document.createElement("button")
             chipsbutton.id = `chips_${chip}`
             chipsbutton.textContent = `${chip}`
-            chipsbutton.className = `$chip-${chip}`
+            chipsbutton.className = `chips`
             chips_stack.appendChild(chipsbutton)
         }
-
-
-
 
         exitButton.addEventListener("click", () => {
             window.location.reload()
@@ -83,6 +80,9 @@ class Game {
 
         hitButton.addEventListener("click", () => {
             console.log("player will recive two cards")
+            if (this.bet === 0) {
+                console.log("player has not placed a bet")
+            }
         });
 
 

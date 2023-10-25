@@ -6,7 +6,7 @@ body {
   justify-content: center;
   font-family: "Andale Mono", sans-serif;
   font-weight: lighter;
-  background-color: black;
+  background-color: white;
   background-size: 100% 100%;
   animation: gradient 15s ease infinite;
   flex-direction: column;
@@ -16,15 +16,18 @@ body {
   overflow: hidden;
   width: 1000px;
   height: 700px;
-  background: url("../img/inicio.png") no-repeat;
+  /*background: url("../img/inicio.png") no-repeat;*/
   background-size: cover;
   position: relative;
   box-shadow: 20px 20px 10px black;
   padding: 50px 100px;
-  align-items: start;
+  align-items: center;
   display: flex;
   flex-direction: column;
   margin-top: 30px;
+  justify-content: center;
+  background-color: darkgreen;
+  border-radius: 20px;
 }
 
 #creators-credits {
@@ -44,25 +47,28 @@ body {
   color: white;
   font-size: 40px;
   position: relative;
-  margin-bottom: 70px;
-  margin-top: 250px;
+  margin: 100px 0;
+  width: 100%;
+  text-align: center;
 }
 
 #quote-intro {
   color: white;
-  font-size: 20px;
   position: relative;
-  margin-bottom: 60px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 15px;
 }
 
 #bj-board .button-intro {
-  background: darkgreen;
+  background: green;
   cursor: pointer;
   margin-top: 30px;
   width: 320px;
   padding: 10px;
   color: white;
-  border-radius: 10px;
+  border-radius: 15px;
   font-size: 30px;
   text-align: center;
   font-weight: lighter;
@@ -70,7 +76,7 @@ body {
 }
 
 #bj-board .button-intro:hover {
-  background-color: green;
+  background-color: lightgreen;
   transition: 0.7s;
 }
 
@@ -110,35 +116,10 @@ body {
   color: white;
 }
 
-.playerButton {
-  height: 100%;
-  width: 100%;
-  font-size: 30px;
-  color: gold;
-  background: none;
-}
-
-#betInput {
-  height: 100px;
-  width: 300px;
-  font-size: 50px;
-  position: absolute;
-  left: 70%;
-  top: 70%;
-  color: gold;
-  background: none;
-  text-align: center;
-}
-
-::placeholder {
-  color: gold;
-}
-
 #player-controls {
   position: absolute;
-  bottom: 0;
-  padding: 10px;
-  width: 100%;
+  bottom: 10px;
+  width: 80%;
   height: 60px;
   left: 0;
   display: flex;
@@ -147,24 +128,50 @@ body {
   row-gap: normal;
 }
 
+.playerButton {
+  height: 100%;
+  width: 100%;
+  font-size: 30px;
+  color: white;
+  background: darkolivegreen;
+  border-radius: 10px;
+  margin: 0 10px;
+}
+
+/*#betInput {*/
+/*  height: 100px;*/
+/*  width: 300px;*/
+/*  font-size: 50px;*/
+/*  position: absolute;*/
+/*  left: 70%;*/
+/*  top: 70%;*/
+/*  color: gold;*/
+/*  background: none;*/
+/*  text-align: center;*/
+/*}*/
+
+::placeholder {
+  color: gold;
+}
+
 #exitButton {
   position: absolute;
   height: 60px;
   width: 200px;
-  top: 5%;
-  left: 80%;
+  top: 4px;
+  left: 83%;
   font-size: 30px;
   color: white;
   background-color: red;
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
-#player-cash {
-  height: 100px;
-  width: 100px;
-  color: white;
-  font-size: 30px;
-}
+/*#player-cash {*/
+/*  height: 100px;*/
+/*  width: 100px;*/
+/*  color: white;*/
+/*  font-size: 30px;*/
+/*}*/
 
 
 .card {
@@ -217,6 +224,12 @@ body {
   transform: rotate(180deg);
   top: auto;
   left: auto;
+}
+
+#chips-stack {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
 }
 
 

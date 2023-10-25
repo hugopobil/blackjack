@@ -71,7 +71,7 @@ window.addEventListener("load", () => {
   const welcomeMessage = document.createElement("div")
   const quote = document.createElement("div")
 
-  welcomeMessage.textContent = "Welcome to BlackJack!"
+  welcomeMessage.textContent = "Welcome to Iron-Jack!"
   welcomeMessage.id = "welcome-message-intro"
 
   quote.textContent = new Quote().generate()

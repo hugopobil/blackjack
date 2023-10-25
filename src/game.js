@@ -14,11 +14,11 @@ class Game {
     start() {
         
         // input for bets
-        const numericInput = document.createElement("input");
-        numericInput.type = "number";
-        numericInput.id = "betInput";
-        numericInput.placeholder = "Your Bet...";
-        this.container.appendChild(numericInput);
+        // const numericInput = document.createElement("input");
+        // numericInput.type = "number";
+        // numericInput.id = "betInput";
+        // numericInput.placeholder = "Your Bet...";
+        // this.container.appendChild(numericInput);
 
         const playerControls = document.createElement("div")
         playerControls.id = "player-controls"
@@ -55,14 +55,34 @@ class Game {
         this.container.appendChild(exitButton)
 
         // visualizacion en la pantalla de juego del cash del player
-        const playerCash = document.createElement("div")
-        playerCash.textContent = this.player.cash
-        playerCash.id = "player-cash"
-        this.container.appendChild(playerCash)
+        // const playerCash = document.createElement("div")
+        // playerCash.textContent = this.player.cash
+        // playerCash.id = "player-cash"
+        // this.container.appendChild(playerCash)
+
+        const chips_stack = document.createElement("div")
+        chips_stack.id = "chips-stack"
+        this.container.appendChild(chips_stack)
+
+        const chips = [5, 10, 25, 50, 100]
+
+        for (let chip of chips) {
+            let chipsbutton = document.createElement("button")
+            chipsbutton.id = `chips_${chip}`
+            chipsbutton.textContent = `${chip}`
+            chipsbutton.className = `$chip-${chip}`
+            chips_stack.appendChild(chipsbutton)
+        }
+
+
 
 
         exitButton.addEventListener("click", () => {
             window.location.reload()
+        });
+
+        hitButton.addEventListener("click", () => {
+            console.log("player will recive two cards")
         });
 
 

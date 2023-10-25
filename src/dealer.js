@@ -3,6 +3,7 @@ class Dealer {
         this.container = container
         this.cash = 1000000000
         this.cards = []
+        this.count = 0
     }
 
     welcome_message() {

@@ -3,17 +3,20 @@ class Game {
         this.container = container
         this.player = new Player(this.container);
         this.dealer = new Dealer(this.container);
-        this.bet = 0
-        this.cards = new Card (container)
+        this.bet = 50
+        this.cards = cards
         this.width = this.container.offsetWidth;
         this.height = this.container.offsetHeight;
         this.x = this.container.offsetWidth
         this.y = this.container.offsetHeight;
+
+        this.state = false;
     }
 
     start() {
         const bjBoard = document.getElementById ("bj-board")
         bjBoard.style.backgroundImage = 'url("./img/inicio_clean.png")'
+
         // input for bets
         // const numericInput = document.createElement("input");
         // numericInput.type = "number";
@@ -81,8 +84,23 @@ class Game {
 
         hitButton.addEventListener("click", () => {
             console.log("player will recive two cards")
-            if (this.bet === 0) {
-                console.log("player has not placed a bet")
+            if (this.bet !== 0) {
+
+                let player_start_cards_number = 2
+                let dealer_start_cards_number = 2
+
+                for (let i = 0; i < player_start_cards_number; i++) {
+                    this.player.cards.push(this.cards[0])
+                    this.cards.shift()
+                }
+
+                for (let i = 0; i < dealer_start_cards_number; i++) {
+                    this.dealer.cards.push(this.cards[0])
+                    this.cards.shift()
+                }
+
+                // TODO: Añadir el movimiento de las cartas y creación de las cartas
+                // TODO: Esperar a que las cartas se repartan
             }
         });
 

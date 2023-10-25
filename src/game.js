@@ -12,9 +12,7 @@ class Game {
     }
 
     start() {
-        this.cards.generateCards('hearts', 5)
-
-
+        
         // input for bets
         const numericInput = document.createElement("input");
         numericInput.type = "number";

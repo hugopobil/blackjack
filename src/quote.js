@@ -15,7 +15,7 @@ class Quote {
     constructor() {}
 
     generate() {
-        let index = Math.floor(Math.random() * (luckQuotes.length + 1))
+        let index = Math.floor(Math.random() * (luckQuotes.length))
         return luckQuotes[index]
     }
 }

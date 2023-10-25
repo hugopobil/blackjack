@@ -14,6 +14,8 @@ class Game {
     start() {
         const bjBoard = document.getElementById ("bj-board")
         bjBoard.style.backgroundImage = 'url("./img/inicio_clean.png")'
+
+
         // input for bets
         // const numericInput = document.createElement("input");
         // numericInput.type = "number";
@@ -61,18 +63,19 @@ class Game {
         // playerCash.id = "player-cash"
         // this.container.appendChild(playerCash)
 
-        const chips_stack = document.createElement("div")
-        chips_stack.id = "chips-stack"
-        this.container.appendChild(chips_stack)
+        const chipsStack = document.createElement("div")
+        chipsStack.id = "chips-stack"
+        this.container.appendChild(chipsStack)
+        
 
         const chips = [5, 10, 25, 50, 100]
 
         for (let chip of chips) {
-            let chipsbutton = document.createElement("button")
-            chipsbutton.id = `chips_${chip}`
-            chipsbutton.textContent = `${chip}`
-            chipsbutton.className = `chips`
-            chips_stack.appendChild(chipsbutton)
+            let chipsButton = document.createElement("button")
+            chipsButton.id = `chips_${chip}`
+            chipsButton.textContent = `${chip}`
+            chipsButton.className = `chips`
+            chipsStack.appendChild(chipsButton)
         }
 
         exitButton.addEventListener("click", () => {

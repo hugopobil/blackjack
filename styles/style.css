@@ -225,15 +225,10 @@ body {
   top: auto;
   left: auto;
 }
-
-#chips-stack {
+#chips-stack{
   display: flex;
-  flex-direction: row;
-  position: absolute;
-  width: 700px;
-  justify-content: space-around;
-  top: 600px;
-  right: 30px;
+  flex-direction: column;
+  
 }
 
 .chips {

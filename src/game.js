@@ -12,7 +12,8 @@ class Game {
     }
 
     start() {
-        
+        const bjBoard = document.getElementById ("bj-board")
+        bjBoard.style.backgroundImage = 'url("./img/inicio_clean.png")'
         // input for bets
         // const numericInput = document.createElement("input");
         // numericInput.type = "number";

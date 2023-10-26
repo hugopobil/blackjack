@@ -117,11 +117,12 @@ body {
 }
 
 #player-controls {
-  position: absolute;
-  bottom: 48px;
+  /*position: absolute;*/
+  position:relative;
+  /*bottom: 10px;*/
   width: 80%;
   height: 60px;
-  left: 120px;
+  /*left: 0;*/
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -158,8 +159,8 @@ body {
   position: absolute;
   height: 60px;
   width: 200px;
-  top: 45px;
-  left: 76%;
+  top: 4px;
+  left: 83%;
   font-size: 30px;
   color: white;
   background-color: red;
@@ -228,11 +229,6 @@ body {
 #chips-stack{
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 120px;
-  right: 80px;
-  height: 550px;
-  justify-content: space-around;
 }
 
 .chips {
@@ -241,16 +237,6 @@ body {
   width: 100px;
   box-shadow: 10px 10px 5px black;
   font-size: 40px;
-}
-
-.safe-message {
-  position: absolute;
-  width: 500px;
-  color: white;
-  font-size: 30px;
-  text-align: center;
-  border: 2px dashed white;
-  padding: 20px;
 }
 
 

@@ -1,3 +1,18 @@
+function check_count(cards) {
+    let total_count = 0
+    for (let card of cards) {
+        console.log(card)
+        if (card["value"] === "K" || card["value"] === "Q" || card["value"] === "J") {total_count += 10}
+        else if (card["value"] === "A" && total_count <= 21) {total_count += 11}
+        else if (card["value"] === "A" && total_count > 21) {total_count += 1}
+        else {total_count += Number(card.value)}}
+    return total_count
+}
+
+// add new card
+// this.player.cards.push(this.cards[0])
+// this.cards.shift()
+
 class Game {
     constructor(cards, container) {
         this.container = container
@@ -9,19 +24,23 @@ class Game {
         this.height = this.container.offsetHeight;
         this.x = this.container.offsetWidth
         this.y = this.container.offsetHeight;
+        this.state = "initial-bet";
 
-        this.state = false;
+        /*
+        states updates the phase of the game, this can be:
+        - initial-bet
+        - seguros
+        - players-turn
+        - dealers-turn
+        - hand-end
+         */
     }
 
     start() {
         const bjBoard = document.getElementById ("bj-board")
         bjBoard.style.backgroundImage = 'url("./img/inicio_clean.png")'
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 34ac7282bc0846eb21321b3d59bbe2cd09a8848a
-        // input for bets
+        // TODO: Inputs for bets depreciated (chips button used instead)
         // const numericInput = document.createElement("input");
         // numericInput.type = "number";
         // numericInput.id = "betInput";
@@ -62,7 +81,7 @@ class Game {
         exitButton.textContent = "Exit Game"
         this.container.appendChild(exitButton)
 
-        // visualizacion en la pantalla de juego del cash del player
+        // TODO: Player cash visualization at all times
         // const playerCash = document.createElement("div")
         // playerCash.textContent = this.player.cash
         // playerCash.id = "player-cash"
@@ -71,7 +90,6 @@ class Game {
         const chipsStack = document.createElement("div")
         chipsStack.id = "chips-stack"
         this.container.appendChild(chipsStack)
-        
 
         const chips = [5, 10, 25, 50, 100]
 
@@ -83,29 +101,65 @@ class Game {
             chipsStack.appendChild(chipsButton)
         }
 
+        // The player can always exit the game, at any given point
         exitButton.addEventListener("click", () => {
             window.location.reload()
         });
 
-        hitButton.addEventListener("click", () => {
-            console.log("player will recive two cards")
-            if (this.bet !== 0) {
+        let player_start_cards_number = 2
+        let dealer_start_cards_number = 2
 
-                let player_start_cards_number = 2
-                let dealer_start_cards_number = 2
+        hitButton.addEventListener("click", () => {
+            if (this.bet !== 0 && this.state === "initial-bet") {
 
                 for (let i = 0; i < player_start_cards_number; i++) {
                     this.player.cards.push(this.cards[0])
                     this.cards.shift()
                 }
+                console.log("Player cards: ", this.player.cards)
+                console.log("Player start count -->", check_count(this.player.cards))
 
+                // for (let i = 0; i < dealer_start_cards_number; i++) {
+                //     this.dealer.cards.push(this.cards[0])
+                //     this.cards.shift()
+                // }
+
+                // use this to test the seguros state
+                this.dealer.cards = [{suit: 'Diamonds', value:'A'}, {suit: 'Diamonds', value:'4'}]
+
+                console.log("Dealer cards: ", this.dealer.cards)
+                console.log("dealer start count -->", check_count(this.dealer.cards))
+
+                // change state, once cards have been given to both player and dealer
+                this.state = "seguros"
+            }
+
+            if (this.state === "seguros") {
                 for (let i = 0; i < dealer_start_cards_number; i++) {
-                    this.dealer.cards.push(this.cards[0])
-                    this.cards.shift()
-                }
+                    if (this.dealer.cards[i].value === "A") {
+                        console.log('Dealer has an A')
 
-                // TODO: Añadir el movimiento de las cartas y creación de las cartas
-                // TODO: Esperar a que las cartas se repartan
+                        // TODO: Change button style for options (hit, double, surrender)
+                        surrenderButton.addEventListener("click", () => {
+                            this.state = "hand-end"
+                            let value_to_return = this.bet / 2
+                            this.player.cash += value_to_return
+                            this.dealer.cash += value_to_return
+                            this.bet = 0
+                        })
+
+                        hitButton.addEventListener("click", () => {
+                            this.player.cards.push(this.cards[0])
+                            this.cards.shift()
+                            this.player.count = check_count(this.player.cards)
+                            console.log("player count -->", this.player.count)
+                            if (this.player.count > 21) {
+                                console.log("The player has lost")
+                                this.state = "hand-end"
+                            }
+                        })
+                    }
+                }
             }
         });
 

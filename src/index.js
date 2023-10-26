@@ -52,6 +52,21 @@ const cards = [
   { suit: 'Spades', value: 'K' },
   { suit: 'Spades', value: 'A' }
 ]
+const testingCards = [
+  { suit: 'Diamonds', value: 'A' },
+  { suit: 'Diamonds', value: '10' },
+  { suit: 'Diamonds', value: 'J' },
+  { suit: 'Diamonds', value: 'Q' },
+  { suit: 'Hearts', value: '7' },
+  { suit: 'Hearts', value: '8' },
+  { suit: 'Hearts', value: '9' },
+  { suit: 'Clubs', value: '2' },
+  { suit: 'Clubs', value: 'K' },
+  { suit: 'Clubs', value: 'A' },
+  { suit: 'Spades', value: '3' },
+  { suit: 'Spades', value: '4' },
+  { suit: 'Spades', value: 'A' }
+]
 
 // Mezclar las cartas aqui y pasarlas ya mezcladas
 function shuffleArray(array) {
@@ -87,8 +102,11 @@ window.addEventListener("load", () => {
   container.appendChild(newGameButton)
   container.appendChild(howToPlayButton)
 
-  let totalCards = shuffleArray(cards)
-      .concat(shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards))
+  // let totalCards = shuffleArray(cards)
+  //     .concat(shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards))
+  //
+  let totalCards = shuffleArray(testingCards)
+
 
   newGameButton.addEventListener("click" , () => {
     welcomeMessage.remove()

@@ -15,9 +15,6 @@ class Card {
         suitImage.classList.add('suit');
         suitImage.src = `./img/${suit}.png`;
 
-
-
-
         const suitImageSmall = document.createElement('img');
         suitImageSmall.classList.add('suit-small');
         suitImageSmall.src = `./img/${suit}.png`;
@@ -53,6 +50,7 @@ class Card {
         placeholder.appendChild(rankTextBottom);
 
         this.container.appendChild(card);
-
     }
+
+
 }

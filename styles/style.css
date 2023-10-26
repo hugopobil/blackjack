@@ -228,9 +228,10 @@ body {
   top: auto;
   left: auto;
 }
+
 #chips-stack{
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 .chips {

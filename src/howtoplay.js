@@ -16,7 +16,7 @@ class howToPlay {
         const returnButton = document.createElement("button")
         returnButton.id = "instructions-return-button"
 
-        instruction_title.textContent = "Objetive of BlackJack"
+        instruction_title.textContent = "Objective of BlackJack"
 
         instruction_text.textContent =
             "Beat The Dealer. \
@@ -28,9 +28,9 @@ class howToPlay {
             By drawing a hand value of 21 on your first two cards, when the dealer does not. \
             How do you lose to the dealer? \
             Your hand value exceeds 21. \
-            The dealers hand has a greater value than yours at the end of the round"
+            The dealer's hand has a greater value than yours at the end of the round"
 
-        returnButton.textContent = "Return to Main Menu"
+        returnButton.textContent = "Return"
 
         this.container.appendChild(instruction_title)
         this.container.appendChild(instruction_text)

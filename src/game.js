@@ -10,7 +10,7 @@ function check_count(cards) {
 }
 
 // colores
-const color_botones_jugador_activado = "darkblue"
+const color_botones_jugador_activado = "green"
 const color_botones_jugador_desactivado = "darkred"
 
 // add new card
@@ -85,9 +85,15 @@ class Game {
         surrenderButton.style.backgroundColor = color_botones_jugador_activado
 
         const exitButton = document.createElement("button")
+        const exitArrow = document.createElement("img")
+        exitArrow.id ="exitArrow"
+        exitArrow.src = "./img/back-arrow.png"
         exitButton.id = "exitButton"
-        exitButton.textContent = "Exit Game"
+        exitButton.textContent = "Back"
+        exitButton.appendChild(exitArrow)
         this.container.appendChild(exitButton)
+
+       
 
         // TODO: Player cash visualization at all times
         // const playerCash = document.createElement("div")
@@ -178,6 +184,7 @@ class Game {
                     if (this.dealer.cards[i].value === "A") {
 
                         console.log('Dealer has an A')
+                        //Y esto? No pone por arriba que el jugador siempre puede salir del juego?
                         exitButton.disabled = true
 
                         const safe_message = document.createElement("div")

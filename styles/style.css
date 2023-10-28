@@ -1,3 +1,7 @@
+* {
+  margin:0;
+  font-family: "Andale Mono", sans-serif;
+}
 body {
   width: 100vw;
   height: 100vh;
@@ -83,17 +87,18 @@ body {
 #instructions-title {
   color: white;
   font-size: 30px;
-  margin-top: 200px;
+  margin-top: 50px;
 }
 
 #instructions-text {
   color: white;
   font-size: 20px;
-  text-align: justify;
+  width: 700px;
+  text-align: center;
 }
 
 #instructions-return-button {
-  background: darkgreen;
+  background: green;
   cursor: pointer;
   margin-top: 30px;
   border-radius: 10px;
@@ -118,24 +123,24 @@ body {
 
 #player-controls {
   position: absolute;
-  bottom: 48px;
-  width: 80%;
-  height: 60px;
-  left: 120px;
+  /* bottom: 48px; */
+  /* width: 25%; */
+  height: 400px;
+  left: 45px;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  row-gap: normal;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-between;
+  gap: 13px;
 }
 
 .playerButton {
   height: 100%;
-  width: 100%;
   font-size: 30px;
   color: white;
-  background: darkolivegreen;
+  background: 0089a5;
   border-radius: 10px;
-  margin: 0 10px;
+
 }
 
 /*#betInput {*/
@@ -156,14 +161,22 @@ body {
 
 #exitButton {
   position: absolute;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: left;
+  align-items: center;
   height: 60px;
-  width: 200px;
+  width: 130px;
   top: 45px;
-  left: 76%;
+  left: 45px;
   font-size: 30px;
-  color: white;
-  background-color: red;
+  /* color: white; */
+  /* background-color: red; */
   border-radius: 15px;
+}
+#exitArrow{
+  height:35px;
+  width:35px;
 }
 
 /*#player-cash {*/
@@ -227,12 +240,13 @@ body {
 
 #chips-stack{
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   position: absolute;
-  top: 160px;
-  right: 80px;
-  height: 450px;
+  bottom: 63px;
+  /* right: 80px; */
+  width: 550px;
   justify-content: space-around;
+  border: none;
 }
 
 

@@ -102,13 +102,19 @@ class Game {
         const chips = [5, 10, 25, 50, 100]
 
         for (let chip of chips) {
-            let chipsButton = document.createElement("button")
-            chipsButton.id = `chips_${chip}`
-            chipsButton.textContent = `${chip}`
-            chipsButton.className = `chips`
-            chipsStack.appendChild(chipsButton)
-        }
+            let chipButton = document.createElement("button")
+            chipButton.id = `chip-${chip}`
+            /*chipsButton.textContent = `${chip}`*/
+            chipButton.className = `chip`
+            chipsStack.appendChild(chipButton)
 
+            const coloredChip = document.getElementById(`chip-${chip}`);
+            coloredChip.style.background = `url('./img/chip-${chip}.png')`;
+            coloredChip.style.backgroundSize = 'contain';
+            coloredChip.style.borderStyle = "none";
+        
+        }
+        
         // The player can always exit the game, at any given point
         exitButton.addEventListener("click", () => {
             window.location.reload()

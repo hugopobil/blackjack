@@ -229,18 +229,18 @@ body {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 120px;
+  top: 160px;
   right: 80px;
-  height: 550px;
+  height: 450px;
   justify-content: space-around;
 }
 
-.chips {
+
+.chip {
   border-radius: 50px;
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
   box-shadow: 10px 10px 5px black;
-  font-size: 40px;
 }
 
 .safe-message {

@@ -126,7 +126,7 @@ class Game {
             window.location.reload()
         });
 
-        let player_start_cards_number = 2
+        let player_start_cards_number = 2 
         let dealer_start_cards_number = 2
 
         hitButton.addEventListener("click", () => {

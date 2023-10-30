@@ -13,10 +13,6 @@ function check_count(cards) {
 const color_botones_jugador_activado = "green"
 const color_botones_jugador_desactivado = "darkred"
 
-// add new card
-// this.player.cards.push(this.cards[0])
-// this.cards.shift()
-
 class Game {
     constructor(cards, container) {
         this.container = container
@@ -29,26 +25,11 @@ class Game {
         this.x = this.container.offsetWidth
         this.y = this.container.offsetHeight;
         this.state = "initial-bet";
-
-        /*
-        states updates the phase of the game, this can be:
-        - initial-bet
-        - seguros
-        - hand-playing
-        - hand-end
-         */
     }
 
     start() {
         const bjBoard = document.getElementById ("bj-board")
         bjBoard.style.backgroundImage = 'url("./img/inicio_clean.png")'
-
-        // TODO: Inputs for bets depreciated (chips button used instead)
-        // const numericInput = document.createElement("input");
-        // numericInput.type = "number";
-        // numericInput.id = "betInput";
-        // numericInput.placeholder = "Your Bet...";
-        // this.container.appendChild(numericInput);
 
         const playerControls = document.createElement("div")
         playerControls.id = "player-controls"
@@ -158,88 +139,87 @@ class Game {
 
                 // change state, once cards have been given to both player and dealer
                 this.state = "seguros"
-
-
-
             }
 
             // process to let the player decide what happens after delear gets A
             if (this.state === "seguros") {
-                // surrenderButton.style.backgroundColor = color_botones_jugador_activado
-                // hitButton.style.backgroundColor = color_botones_jugador_activado
-                // doubleButton.style.backgroundColor = color_botones_jugador_activado
-                //
-                // standButton.style.backgroundColor = color_botones_jugador_desactivado
-                // splitButton.style.backgroundColor = color_botones_jugador_desactivado
-                //
-                // // disable the buttons
-                // standButton.disabled = true
-                // doubleButton.disabled = true
-                // splitButton.disabled = true
 
-                // add message about what to do when the delear has an A
-
+                const safe_message = document.createElement("div")
+                safe_message.className = "safe-message"
+                safe_message.textContent = "The delear has an A! You can continue with your hand by hitting HIT"
+                            + " or press Surrender and get back 50% of your bet now!"
 
                 for (let i = 0; i < dealer_start_cards_number; i++) {
                     if (this.dealer.cards[i].value === "A") {
-
                         console.log('Dealer has an A')
-                        //Y esto? No pone por arriba que el jugador siempre puede salir del juego?
                         exitButton.disabled = true
-
-                        const safe_message = document.createElement("div")
-                        safe_message.className = "safe-message"
-                        safe_message.textContent = "The delear has an A! You can continue with your hand by hitting HIT"
-                            + " or press Surrender and get back 50% of your bet now!"
                         this.container.appendChild(safe_message)
 
                         // ignore the message and get another card on your hand
                         hitButton.addEventListener("click", () => {
+                            console.log(`The player continues playing and has a count of ${this.player.count}`)
                             this.state = "hand-playing"
                             safe_message.remove()
-
                             this.player.cards.push(this.cards[0])
                             this.cards.shift()
                             this.player.count = check_count(this.player.cards)
                             console.log("player count -->", this.player.count)
                             if (this.player.count > 21) {
-                                // console.log("The player has lost")
-                                // TODO: Add a lossing message
                                 this.state = "hand-end"
                             }
                         })
 
+                        // stadn button
+                        standButton.addEventListener("click", () => {
+                            console.log(`The player stands and has a count of ${this.player.count}`)
+                        })
+
+                        // double button
+                        doubleButton.addEventListener("click", () => {
+                            console.log(`The player doubles and has a count of ${this.player.count}`)
+                            const current_bet = this.bet
+                            this.player.cash -= current_bet
+                            this.bet += current_bet
+                            this.player.cards.push(this.cards[0])
+                            this.cards.shift()
+                            this.state = "hand-double"
+                        })
+
+                        // split button
+                        splitButton.addEventListener("click", () => {
+                            console.log(`The player splits and has a count of ${this.player.count}`)
+                        })
+
                         // surrender option to get 50% of bet and play another hand
                         surrenderButton.addEventListener("click", () => {
+                            console.log(`The player surrenders and has a count of ${this.player.count}`)
                             this.state = "hand-end"
+                            safe_message.remove()
                             let value_to_return = this.bet / 2
                             this.player.cash += value_to_return
                             this.dealer.cash += value_to_return
                             this.bet = 0
-                            safe_message.remove()
-                            
-                            console.log("Player has surrended", this.bet)
-
-                            // TODO: hand should be restarted3
-                        })
-
-                        // stadn button
-                        standButton.addEventListener("click", () => {
-                            // the player is happy with his bet
-                            // TODO: Dealear should hit, and stop at 17
-                            /*
-                            Paula, te pongo una explicación aqui:
-                            Cuando el jugador decide the está contento con su mano, es el turno del
-                            dealer, the ira cogiendo cartas hasta obtener un resultado > 17, a partir de ahi no
-                            puede seguir pidiendo cartas.
-                             */
                         })
                     }
                 }
             }
 
             if (this.state === "hand-playing") {
+                exitButton.disabled = false
+            }
 
+            if (this.state === "hand-end") {
+                exitButton.disabled = false
+            }
+
+            if (this.state === "hand-double") {
+                exitButton.disabled = false
+            }
+
+            // esta parte es la ultima que se tiene que programar
+            // ya que se convierten en dos manos, encapsular el codigo en funciones de jugador y deleaer
+            if (this.state === "split-hand") {
+                exitButton.disabled = false
             }
         });
 

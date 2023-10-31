@@ -1,43 +1,51 @@
 class Card {
-    constructor(container) {
+    constructor(container, suit, rank, top, left) {
         this.container = container;
+        this.suit = suit;
+        this.rank = rank;
+        this.top = top;
+        this.left = left;
     }
 
-    generateCards(suit, rank) {
+    generateCards() {
 
         const card = document.createElement('div');
         card.classList.add('card');
+        card.style.top = this.top;
+        card.style.left = this.left;
+        card.style.width = "180px"
+        card.style.height = "250px"
 
         const placeholder = document.createElement('div')
         placeholder.classList.add('placeholder')
 
         const suitImage = document.createElement('img');
         suitImage.classList.add('suit');
-        suitImage.src = `./img/${suit}.png`;
+        suitImage.src = `./img/${this.suit}.png`;
 
         const suitImageSmall = document.createElement('img');
         suitImageSmall.classList.add('suit-small');
-        suitImageSmall.src = `./img/${suit}.png`;
+        suitImageSmall.src = `./img/${this.suit}.png`;
 
         const rankTextTop = document.createElement('div');
         rankTextTop.classList.add('rank');
         const topNumber = document.createElement('div');
-        topNumber.textContent = rank;
+        topNumber.textContent = this.rank;
         rankTextTop.appendChild(topNumber)
 
         const rankTextBottom = document.createElement('div');
         rankTextBottom.classList.add('rank');
         rankTextBottom.classList.add('bottom-right');
         const bottomNumber = document.createElement('div');
-        bottomNumber.textContent = rank;
+        bottomNumber.textContent = this.rank;
         rankTextBottom.appendChild(bottomNumber)
 
-        if (suit === "hearts" || suit === "diamonds") {
+        if (this.suit === "hearts" || this.suit === "diamonds") {
             topNumber.style.color = "red"
             bottomNumber.style.color = "red"
         }
 
-        if (suit === "spades" || suit === "clubs") {
+        if (this.suit === "spades" || this.suit === "clubs") {
             topNumber.style.color = "black"
             bottomNumber.style.color = "black"
         }

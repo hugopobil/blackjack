@@ -26,10 +26,11 @@ class Game {
         this.y = this.container.offsetHeight;
         this.state = "initial-bet";
     }
-
+    
     start() {
+
         const bjBoard = document.getElementById ("bj-board")
-        bjBoard.style.backgroundImage = 'url("./img/inicio_clean.png")'
+        bjBoard.style.backgroundImage = 'url("./img/inicio_clean.png")'       
 
         const playerControls = document.createElement("div")
         playerControls.id = "player-controls"
@@ -73,8 +74,6 @@ class Game {
         exitButton.textContent = "Back"
         exitButton.appendChild(exitArrow)
         this.container.appendChild(exitButton)
-
-       
 
         // TODO: Player cash visualization at all times
         // const playerCash = document.createElement("div")
@@ -129,8 +128,8 @@ class Game {
                 this.dealer.cards = [{suit: 'Diamonds', value:'A'}, {suit: 'Diamonds', value:'4'}]
 
                 console.log("Dealer cards: ", this.dealer.cards)
-                console.log("dealer start count -->", check_count(this.dealer.cards))
-
+                console.log("Dealer start count -->", check_count(this.dealer.cards))
+                console.log (this.state)
                 if (this.player.count === 21) {
                     console.log("Player has won de round")
                     this.player.cash += (this.bet * 2) + (this.bet / 2)
@@ -169,7 +168,7 @@ class Game {
                             }
                         })
 
-                        // stadn button
+                        // stand button
                         standButton.addEventListener("click", () => {
                             console.log(`The player stands and has a count of ${this.player.count}`)
                         })
@@ -221,8 +220,22 @@ class Game {
             if (this.state === "split-hand") {
                 exitButton.disabled = false
             }
-        });
 
+            const initialLeft = 300;
+            const gap = 50;
+
+            this.dealer.cards.forEach((card, i) => {
+                const left = initialLeft + initialLeft * i + gap;
+                const cardImage = new Card(this.container, card.suit, card.value, '70px', `${left}px`);
+                cardImage.generateCards();
+            })
+
+            this.player.cards.forEach((card, i) => {
+                const left = initialLeft + initialLeft * i + gap;
+                const cardImage = new Card(this.container, card.suit, card.value, '420px', `${left}px`);
+                cardImage.generateCards();
+            })
+        });
 
     }
 }

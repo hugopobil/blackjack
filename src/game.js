@@ -15,6 +15,10 @@ function check_count(cards) {
     return total_count
 }
 
+// Espaciado cartas
+const initialLeft = 500;
+const gap = 100;
+
 // colores
 const color_botones_jugador_activado = "green"
 const color_botones_jugador_desactivado = "darkred"
@@ -199,17 +203,15 @@ class Game {
                     console.log("Dealer cards: ", this.dealer.cards, "Count: ", check_count(this.dealer.cards))
 
                     // Muestra las cartas en pantalla en la x y la y que se la proporcionado
-                    const initialLeft = 300;
-                    const gap = 50;
 
                     this.dealer.cards.forEach((card, i) => {
-                        const left = initialLeft + initialLeft * i + gap;
+                        const left = initialLeft + gap * i;
                         const cardImage = new Card(this.container, card.suit, card.value, '80px', `${left}px`);
                         cardImage.generateCards();
                     })
 
                     this.player.cards.forEach((card, i) => {
-                        const left = initialLeft + initialLeft * i + gap;
+                        const left = initialLeft + gap * i;
                         const cardImage = new Card(this.container, card.suit, card.value, '420px', `${left}px`);
                         cardImage.generateCards();
                     })
@@ -231,11 +233,18 @@ class Game {
         if (this.state === "hand-started") {
             // continue playing and ignore the message
             this.hitButton.onclick = () => {
-
+                
                 // give the player a new card
                 this.player.cards.push(this.cards[0])
                 this.cards.shift()
-                console.log(this.player.cards)
+                console.log("Player cards: ", this.player.cards, "Count: ", check_count(this.player.cards))
+
+                this.player.cards.forEach((card, i) => {
+
+                    const left = initialLeft + gap * i ;
+                    const cardImage = new Card(this.container, card.suit, card.value, '420px', `${left}px`);
+                    cardImage.generateCards();
+                })
 
                 if (this.player.count > 21) {
                     console.log("The player has more than 21 and loses the hand")

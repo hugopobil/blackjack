@@ -174,7 +174,7 @@ class Game {
             })
 
 
-             this.hitButton.onclick = () => {
+            this.hitButton.onclick = () => {
                 // console.log("primero")
                 if (this.bet > 0) {
 
@@ -214,12 +214,12 @@ class Game {
                         cardImage.generateCards();
                     })
 
-                    if (this.player.count === 21) {
-                        console.log("Player has 21 and wins the hand")
-                        this.player.cash += (this.bet * 2) + (this.bet / 2)
-                        this.dealer.cash -= (this.bet * 2) + (this.bet / 2)
-                        this.state = "hand-end"
-                    }
+                    // if (this.player.count === 21) {
+                    //     console.log("Player has 21 and wins the hand")
+                    //     this.player.cash += (this.bet * 2) + (this.bet / 2)
+                    //     this.dealer.cash -= (this.bet * 2) + (this.bet / 2)
+                    //     this.state = "hand-end"
+                    // }
 
                     this.state = "hand-started"
                     this.handleState()
@@ -230,7 +230,7 @@ class Game {
         // the initial bet has been placed, so now the player can ask for cards
         if (this.state === "hand-started") {
             // continue playing and ignore the message
-             this.hitButton.onclick = () => {
+            this.hitButton.onclick = () => {
 
                 // give the player a new card
                 this.player.cards.push(this.cards[0])
@@ -245,12 +245,14 @@ class Game {
 
             // stand button
             this.standButton.onclick = () => {
-                this.state = "player-stand"
-                this.handleState()
+                console.log("Stand button pressed")
+                // this.state = "player-stand"
+                // this.handleState()
 
                 // the delear starts his hand
                 for (let i = 0; i < 10; i++) {
-                    this.player.cards.push(this.cards[0])
+                    console.log(i)
+                    this.dealer.cards.push(this.cards[0])
                     this.cards.shift()
                     if (this.dealer.count >= 17 && this.dealer.count <= 21) {
                         console.log("dealer stands")
@@ -260,6 +262,8 @@ class Game {
                         break;
                     }
                 }
+                console.log(this.dealer.cards)
+                console.log("process finnished")
             }
 
             // surrender and end current hand

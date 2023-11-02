@@ -12,6 +12,7 @@ function check_count(cards) {
             total_count += Number(card.value)
         }
     }
+    // console.log({  cards, total_count })
     return total_count
 }
 
@@ -229,41 +230,54 @@ class Game {
 
         // the initial bet has been placed, so now the player can ask for cards
         if (this.state === "hand-started") {
+            this.player.count = check_count(this.player.cards)
             // continue playing and ignore the message
             this.hitButton.onclick = () => {
 
                 // give the player a new card
                 this.player.cards.push(this.cards[0])
                 this.cards.shift()
-                console.log(this.player.cards)
+                this.player.count = check_count(this.player.cards)
+                // console.log(this.player.cards, check_count(this.player.cards))
 
                 if (this.player.count > 21) {
                     console.log("The player has more than 21 and loses the hand")
                     this.state = "hand-end"
+                    this.handleState()
                 }
             }
 
             // stand button
             this.standButton.onclick = () => {
-                console.log("Stand button pressed")
                 // this.state = "player-stand"
                 // this.handleState()
 
                 // the delear starts his hand
                 for (let i = 0; i < 10; i++) {
-                    console.log(i)
-                    this.dealer.cards.push(this.cards[0])
-                    this.cards.shift()
-                    if (this.dealer.count >= 17 && this.dealer.count <= 21) {
-                        console.log("dealer stands")
+                    this.dealer.count = check_count(this.dealer.cards)
+
+                    if (this.dealer.count === 21) {
+                        console.log("dealer wins")
+                        this.state = "hand-end"
+                        this.handleState()
                         break;
+                    } else if (this.dealer.count <= 21 && this.dealer.count >= 17) {
+                        console.log("dealer stand")
+                        this.state = "hand-end"
+                        this.handleState()
+                        break;
+                    } else if (this.dealer.count < 21) {
+                        console.log("dealer plays")
+                        this.dealer.cards.push(this.cards[0])
+                        this.cards.shift()
+                        this.dealer.count = check_count(this.dealer.cards)
                     } else if (this.dealer.count > 21) {
-                        console.log("Delear loses")
+                        console.log("dealer loses")
+                        this.state = "hand-end"
+                        this.handleState()
                         break;
                     }
                 }
-                console.log(this.dealer.cards)
-                console.log("process finnished")
             }
 
             // surrender and end current hand
@@ -281,8 +295,28 @@ class Game {
         }
         // esta parte es la ultima que se tiene que programar
         // ya que se convierten en dos manos, encapsular el codigo en funciones de jugador y deleaer
-        if (this.state === "split-hand") {
-            this.exitButton.disabled = false
+        if (this.state === "hand-end") {
+            console.log("player count", this.player.count)
+            console.log("dealer count", this.dealer.count)
+            //
+            // if (this.player.count > this.dealer.count) {
+            //     console.log("player wins")
+            //     this.player.cash += this.bet * 2
+            //     this.dealer.cash -= this.bet * 2
+            // } else if (this.player.count < this.dealer.count) {
+            //     console.log("player wins")
+            //     this.player.cash -= this.bet * 2
+            //     this.dealer.cash += this.bet * 2
+            // } else if (this.player.count === this.dealer.count){
+            //     this.player.cash += this.bet
+            //     this.dealer.cash += this.bet
+            // }
+            //
+            // // this.dealer.cards = []
+            // // this.player.cards = []
+            // this.bet = 0
+            // console.log("hand has ended")
+
         }
     }
 }

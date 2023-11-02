@@ -18,7 +18,7 @@ class Game {
         this.container = container
         this.player = new Player(this.container);
         this.dealer = new Dealer(this.container);
-        this.bet = 50
+        this.bet = 0
         this.cards = cards
         this.width = this.container.offsetWidth;
         this.height = this.container.offsetHeight;
@@ -180,6 +180,22 @@ class Game {
                     console.log("Player cards: ", this.player.cards, "Count: ", check_count(this.player.cards))
                     console.log("Dealer cards: ", this.dealer.cards, "Count: ", check_count(this.dealer.cards))
 
+                    // Muestra las cartas en pantalla en la x y la y que se la proporcionado
+                    const initialLeft = 300;
+                    const gap = 50;
+
+                    this.dealer.cards.forEach((card, i) => {
+                        const left = initialLeft + initialLeft * i + gap;
+                        const cardImage = new Card(this.container, card.suit, card.value, '70px', `${left}px`);
+                        cardImage.generateCards();
+                    })
+
+                    this.player.cards.forEach((card, i) => {
+                        const left = initialLeft + initialLeft * i + gap;
+                        const cardImage = new Card(this.container, card.suit, card.value, '420px', `${left}px`);
+                        cardImage.generateCards();
+                    })
+
                     if (this.player.count === 21) {
                         console.log("Player has 21 and wins the hand")
                         this.player.cash += (this.bet * 2) + (this.bet / 2)
@@ -239,26 +255,8 @@ class Game {
         }
             // esta parte es la ultima que se tiene que programar
             // ya que se convierten en dos manos, encapsular el codigo en funciones de jugador y deleaer
-            if (this.state === "split-hand") {
-                exitButton.disabled = false
-            }
-
-            //Muestra las cartas en pantalla en la x y la y que se la proporcionado
-            const initialLeft = 300;
-            const gap = 50;
-
-            this.dealer.cards.forEach((card, i) => {
-                const left = initialLeft + initialLeft * i + gap;
-                const cardImage = new Card(this.container, card.suit, card.value, '70px', `${left}px`);
-                cardImage.generateCards();
-            })
-
-            this.player.cards.forEach((card, i) => {
-                const left = initialLeft + initialLeft * i + gap;
-                const cardImage = new Card(this.container, card.suit, card.value, '420px', `${left}px`);
-                cardImage.generateCards();
-            })
-        });
-
+        if (this.state === "split-hand") {
+            exitButton.disabled = false
+        }
     }
 }

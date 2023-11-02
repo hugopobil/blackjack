@@ -11,7 +11,7 @@ function check_count(cards) {
 
 // colores
 const color_botones_jugador_activado = "green"
-const color_botones_jugador_desactivado = "darkred"
+const color_botones_jugador_desactivado = "darkgreen"
 
 class Game {
     constructor(cards, container) {
@@ -78,7 +78,7 @@ class Game {
         // TODO: Player cash visualization at all times
         // const playerCash = document.createElement("div")
         // playerCash.textContent = this.player.cash
-        // playerCash.id = "player-cash"
+        // playerCash.id = "playerCash"
         // this.container.appendChild(playerCash)
 
         const chipsStack = document.createElement("div")
@@ -109,7 +109,12 @@ class Game {
         let player_start_cards_number = 2 
         let dealer_start_cards_number = 2
 
+        //No habría que meter aquí un clicCount o clicState o algo asi? Para que la primera vez que se hace clic se repartan dos cartas
+        // y el resto de veces se reparta solo una
+
+        //const clicState = false
         hitButton.addEventListener("click", () => {
+            //if (this.bet !== 0 && this.state === "initial-bet" && clicState)
             if (this.bet !== 0 && this.state === "initial-bet") {
 
                 for (let i = 0; i < player_start_cards_number; i++) {
@@ -129,9 +134,9 @@ class Game {
 
                 console.log("Dealer cards: ", this.dealer.cards)
                 console.log("Dealer start count -->", check_count(this.dealer.cards))
-                console.log (this.state)
+
                 if (this.player.count === 21) {
-                    console.log("Player has won de round")
+                    console.log("Player has won the round")
                     this.player.cash += (this.bet * 2) + (this.bet / 2)
                     this.dealer.cash -= (this.bet * 2) + (this.bet / 2)
                 }
@@ -220,7 +225,8 @@ class Game {
             if (this.state === "split-hand") {
                 exitButton.disabled = false
             }
-
+            
+            //Muestra las cartas en pantalla en la x y la y que se la proporcionado
             const initialLeft = 300;
             const gap = 50;
 

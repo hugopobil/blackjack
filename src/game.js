@@ -28,10 +28,10 @@ class Game {
         this.dealer = new Dealer(this.container);
         this.bet = 0
         this.cards = cards
-        this.width = this.container.offsetWidth;
-        this.height = this.container.offsetHeight;
-        this.x = this.container.offsetWidth
-        this.y = this.container.offsetHeight;
+        // this.width = this.container.offsetWidth;
+        // this.height = this.container.offsetHeight;
+        // this.x = this.container.offsetWidth
+        // this.y = this.container.offsetHeight;
         this.state = "new-hand";
         this.hitButton = document.createElement("button")
         this.standButton = document.createElement("button")
@@ -326,7 +326,7 @@ class Game {
             if (this.player.count > 21) {
                 console.log("dealer wins")
                 // this.player.cash -= this.bet * 2
-                this.dealer.cash += this.bet * 2
+                this.dealer.cash += this.bet
             } else if (this.dealer.count > 21) {
                 console.log("player wins")
                 this.player.cash += this.bet * 2
@@ -334,6 +334,18 @@ class Game {
             } else if (this.player.count === this.dealer.count){
                 console.log("empate")
                 this.player.cash += this.bet
+                this.dealer.cash += this.bet
+            } else if (this.player.count > this.dealer.count
+                && this.player.count <= 21
+                && this.dealer.count <= 21) {
+                console.log("player wins")
+                this.player.cash += this.bet * 2
+                this.dealer.cash -= this.bet
+            } else if (this.player.count < this.dealer.count
+                && this.player.count <= 21
+                && this.dealer.count <= 21) {
+                console.log("dealer wins")
+                // this.player.cash -= this.bet * 2
                 this.dealer.cash += this.bet
             }
 

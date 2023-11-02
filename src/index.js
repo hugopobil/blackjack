@@ -107,7 +107,6 @@ window.addEventListener("load", () => {
   //
   let totalCards = shuffleArray(testingCards)
 
-
   newGameButton.addEventListener("click" , () => {
     welcomeMessage.remove()
     quote.remove()

@@ -1,11 +1,17 @@
 function check_count(cards) {
     let total_count = 0
     for (let card of cards) {
-        console.log(card)
-        if (card["value"] === "K" || card["value"] === "Q" || card["value"] === "J") {total_count += 10}
-        else if (card["value"] === "A" && total_count <= 21) {total_count += 11}
-        else if (card["value"] === "A" && total_count > 21) {total_count += 1}
-        else {total_count += Number(card.value)}}
+        // console.log(card)
+        if (card["value"] === "K" || card["value"] === "Q" || card["value"] === "J") {
+            total_count += 10
+        } else if (card["value"] === "A" && total_count <= 21) {
+            total_count += 11
+        } else if (card["value"] === "A" && total_count > 21) {
+            total_count += 1
+        } else {
+            total_count += Number(card.value)
+        }
+    }
     return total_count
 }
 
@@ -24,62 +30,64 @@ class Game {
         this.height = this.container.offsetHeight;
         this.x = this.container.offsetWidth
         this.y = this.container.offsetHeight;
-        this.state = "initial-bet";
+        this.state = "new-hand";
+        this.hitButton = document.createElement("button")
+        this.standButton = document.createElement("button")
+        this.exitButton = document.createElement("button")
+        this.exitArrow = document.createElement("img")
+        this.playerCash = document.createElement("div")
     }
 
     start() {
-        const bjBoard = document.getElementById ("bj-board")
+        const bjBoard = document.getElementById("bj-board")
         bjBoard.style.backgroundImage = 'url("./img/inicio_clean.png")'
 
         const playerControls = document.createElement("div")
         playerControls.id = "player-controls"
         this.container.appendChild(playerControls)
 
-        const hitButton = document.createElement("button")
-        hitButton.className = "playerButton"
-        hitButton.textContent = "Hit"
-        playerControls.appendChild(hitButton)
-        hitButton.style.backgroundColor = color_botones_jugador_activado
 
-        const standButton = document.createElement("button")
-        standButton.className = "playerButton"
-        standButton.textContent = "Stand"
-        playerControls.appendChild(standButton)
-        standButton.style.backgroundColor = color_botones_jugador_activado
+        this.hitButton.className = "playerButton"
+        this.hitButton.textContent = "Hit"
+        playerControls.appendChild(this.hitButton)
+        this.hitButton.style.backgroundColor = color_botones_jugador_activado
 
-        const doubleButton = document.createElement("button")
-        doubleButton.className = "playerButton"
-        doubleButton.textContent = "Double"
-        playerControls.appendChild(doubleButton)
-        doubleButton.style.backgroundColor = color_botones_jugador_activado
+        this.standButton.className = "playerButton"
+        this.standButton.textContent = "Stand"
+        playerControls.appendChild(this.standButton)
+        this.standButton.style.backgroundColor = color_botones_jugador_activado
 
-        const splitButton = document.createElement("button")
-        splitButton.className = "playerButton"
-        splitButton.textContent = "Split"
-        playerControls.appendChild(splitButton)
-        splitButton.style.backgroundColor = color_botones_jugador_activado
+        // const doubleButton = document.createElement("button")
+        // doubleButton.className = "playerButton"
+        // doubleButton.textContent = "Double"
+        // // playerControls.appendChild(doubleButton)
+        // doubleButton.style.backgroundColor = color_botones_jugador_activado
+        //
+        // const splitButton = document.createElement("button")
+        // splitButton.className = "playerButton"
+        // splitButton.textContent = "Split"
+        // // playerControls.appendChild(splitButton)
+        // splitButton.style.backgroundColor = color_botones_jugador_activado
+        //
+        // const surrenderButton = document.createElement("button")
+        // surrenderButton.className = "playerButton"
+        // surrenderButton.textContent = "Surrender"
+        // // playerControls.appendChild(surrenderButton)
+        // surrenderButton.style.backgroundColor = color_botones_jugador_activado
 
-        const surrenderButton = document.createElement("button")
-        surrenderButton.className = "playerButton"
-        surrenderButton.textContent = "Surrender"
-        playerControls.appendChild(surrenderButton)
-        surrenderButton.style.backgroundColor = color_botones_jugador_activado
 
-        const exitButton = document.createElement("button")
-        const exitArrow = document.createElement("img")
-        exitArrow.id ="exitArrow"
-        exitArrow.src = "./img/back-arrow.png"
-        exitButton.id = "exitButton"
-        exitButton.textContent = "Back"
-        exitButton.appendChild(exitArrow)
-        this.container.appendChild(exitButton)
+        this.exitArrow.id = "exitArrow"
+        this.exitArrow.src = "./img/back-arrow.png"
+        this.exitButton.id = "exitButton"
+        this.exitButton.textContent = "Back"
+        this.exitButton.appendChild(this.exitArrow)
+        this.container.appendChild(this.exitButton)
 
         // PLAYER CASH
 
-        const playerCash = document.createElement("div")
-        playerCash.textContent = `Player cash $${this.player.cash}`
-        playerCash.id = "player-cash"
-        this.container.appendChild(playerCash)
+        this.playerCash.textContent = `Player cash $${this.player.cash}`
+        this.playerCash.id = "player-cash"
+        this.container.appendChild(this.playerCash)
 
         // CHIP STACK
 
@@ -102,31 +110,34 @@ class Game {
         }
 
         // The player can always exit the game, at any given point
-        exitButton.addEventListener("click", () => {
+        this.exitButton.addEventListener("click", () => {
             window.location.reload()
-        });
+        })
+
+        this.handleState()
+    }
+
+    handleState() {
 
         let player_start_cards_number = 2
         let dealer_start_cards_number = 2
-
-        this.state = "new-hand"
 
         if (this.state === "new-hand") {
             console.log(`The player has $${this.player.cash}`)
             console.log(`Current bet is $${this.bet}`)
 
             // disable the rest of the buttons
-            hitButton.disabled = false
-            standButton.disabled = true
-            doubleButton.disabled = true
-            splitButton.disabled = true
-            surrenderButton.disabled = true
+            // hitButton.disabled = true
+            // standButton.disabled = true
+            // doubleButton.disabled = true
+            // splitButton.disabled = true
+            // surrenderButton.disabled = true
 
             const chip5 = document.getElementById("chip-5")
             chip5.addEventListener("click", () => {
                 this.bet += 5
                 this.player.cash -= 5
-                playerCash.textContent = `Player cash $${this.player.cash}`
+                this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $5 and the current bet is ${this.bet}`)
             })
 
@@ -134,7 +145,7 @@ class Game {
             chip10.addEventListener("click", () => {
                 this.bet += 10
                 this.player.cash -= 10
-                playerCash.textContent = `Player cash $${this.player.cash}`
+                this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $10 and the current bet is ${this.bet}`)
             })
 
@@ -142,7 +153,7 @@ class Game {
             chip25.addEventListener("click", () => {
                 this.bet += 25
                 this.player.cash -= 25
-                playerCash.textContent = `Player cash $${this.player.cash}`
+                this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $25 and the current bet is ${this.bet}`)
             })
 
@@ -150,7 +161,7 @@ class Game {
             chip50.addEventListener("click", () => {
                 this.bet += 50
                 this.player.cash -= 50
-                playerCash.textContent = `Player cash $${this.player.cash}`
+                this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $50 and the current bet is ${this.bet}`)
             })
 
@@ -158,11 +169,13 @@ class Game {
             chip100.addEventListener("click", () => {
                 this.bet += 100
                 this.player.cash -= 100
-                playerCash.textContent = `Player cash $${this.player.cash}`
+                this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $100 and the current bet is ${this.bet}`)
             })
 
-            hitButton.addEventListener("click", () => {
+
+             this.hitButton.onclick = () => {
+                // console.log("primero")
                 if (this.bet > 0) {
 
                     // disable all chips button
@@ -177,6 +190,11 @@ class Game {
                         this.cards.shift()
                     }
 
+                    for (let i = 0; i < dealer_start_cards_number; i++) {
+                        this.dealer.cards.push(this.cards[0])
+                        this.cards.shift()
+                    }
+
                     console.log("Player cards: ", this.player.cards, "Count: ", check_count(this.player.cards))
                     console.log("Dealer cards: ", this.dealer.cards, "Count: ", check_count(this.dealer.cards))
 
@@ -186,7 +204,7 @@ class Game {
 
                     this.dealer.cards.forEach((card, i) => {
                         const left = initialLeft + initialLeft * i + gap;
-                        const cardImage = new Card(this.container, card.suit, card.value, '70px', `${left}px`);
+                        const cardImage = new Card(this.container, card.suit, card.value, '80px', `${left}px`);
                         cardImage.generateCards();
                     })
 
@@ -200,63 +218,67 @@ class Game {
                         console.log("Player has 21 and wins the hand")
                         this.player.cash += (this.bet * 2) + (this.bet / 2)
                         this.dealer.cash -= (this.bet * 2) + (this.bet / 2)
+                        this.state = "hand-end"
                     }
+
                     this.state = "hand-started"
+                    this.handleState()
                 }
-            })
+            }
         }
 
         // the initial bet has been placed, so now the player can ask for cards
         if (this.state === "hand-started") {
-            const safe_message = document.createElement("div")
-            safe_message.className = "safe-message"
-            safe_message.textContent = "The delear has an A! You can continue with your hand by hitting HIT"
-                + " or press Surrender and get back 50% of your bet now!"
-
-            for (let i = 0; i < dealer_start_cards_number; i++) {
-                if (this.dealer.cards[i].value === "A") {
-                    console.log('Dealer has an A')
-                    exitButton.disabled = true
-                    this.container.appendChild(safe_message)
-                }
-            }
-
             // continue playing and ignore the message
-            hitButton.addEventListener("click", () => {
-                this.state = "hand-playing"
-                safe_message.remove()
+             this.hitButton.onclick = () => {
 
                 // give the player a new card
                 this.player.cards.push(this.cards[0])
                 this.cards.shift()
+                console.log(this.player.cards)
 
                 if (this.player.count > 21) {
+                    console.log("The player has more than 21 and loses the hand")
                     this.state = "hand-end"
                 }
-            })
+            }
 
             // stand button
-            standButton.addEventListener("click", () => {
+            this.standButton.onclick = () => {
                 this.state = "player-stand"
-            })
+                this.handleState()
+
+                // the delear starts his hand
+                for (let i = 0; i < 10; i++) {
+                    this.player.cards.push(this.cards[0])
+                    this.cards.shift()
+                    if (this.dealer.count >= 17 && this.dealer.count <= 21) {
+                        console.log("dealer stands")
+                        break;
+                    } else if (this.dealer.count > 21) {
+                        console.log("Delear loses")
+                        break;
+                    }
+                }
+            }
 
             // surrender and end current hand
-            surrenderButton.addEventListener("click", () => {
-                console.log("Player surrenders")
-                safe_message.remove()
+            // surrenderButton.addEventListener("click", () => {
+            //     console.log("Player surrenders")
+            //
+            //     let value_to_return = this.bet / 2
+            //     this.player.cash += value_to_return
+            //     this.dealer.cash += value_to_return
+            //     this.bet = 0
+            //
+            //     this.state = "new-hand"
+            // })
 
-                let value_to_return = this.bet / 2
-                this.player.cash += value_to_return
-                this.dealer.cash += value_to_return
-                this.bet = 0
-
-                this.state = "new-hand"
-            })
         }
-            // esta parte es la ultima que se tiene que programar
-            // ya que se convierten en dos manos, encapsular el codigo en funciones de jugador y deleaer
+        // esta parte es la ultima que se tiene que programar
+        // ya que se convierten en dos manos, encapsular el codigo en funciones de jugador y deleaer
         if (this.state === "split-hand") {
-            exitButton.disabled = false
+            this.exitButton.disabled = false
         }
     }
 }

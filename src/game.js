@@ -1,5 +1,6 @@
 function check_count(cards) {
     let total_count = 0
+
     for (let card of cards) {
         // console.log(card)
         if (card["value"] === "K" || card["value"] === "Q" || card["value"] === "J") {
@@ -124,56 +125,71 @@ class Game {
         let dealer_start_cards_number = 2
 
         if (this.state === "new-hand") {
+
             console.log(`The player has $${this.player.cash}`)
             console.log(`Current bet is $${this.bet}`)
 
             // disable the rest of the buttons
-            // hitButton.disabled = true
-            // standButton.disabled = true
-            // doubleButton.disabled = true
+            this.hitButton.disabled = true
+            this.standButton.disabled = true
+            // this.doubleButton.disabled = true
             // splitButton.disabled = true
             // surrenderButton.disabled = true
 
             const chip5 = document.getElementById("chip-5")
-            chip5.addEventListener("click", () => {
+            chip5.disabled = false
+            chip5.onclick = () => {
+                this.hitButton.disabled = false
+                this.standButton.disabled = false
                 this.bet += 5
                 this.player.cash -= 5
                 this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $5 and the current bet is ${this.bet}`)
-            })
+            }
 
             const chip10 = document.getElementById("chip-10")
-            chip10.addEventListener("click", () => {
+            chip10.disabled = false
+            chip10.onclick = () => {
+                this.hitButton.disabled = false
+                this.standButton.disabled = false
                 this.bet += 10
                 this.player.cash -= 10
                 this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $10 and the current bet is ${this.bet}`)
-            })
+            }
 
             const chip25 = document.getElementById("chip-25")
-            chip25.addEventListener("click", () => {
+            chip25.disabled = false
+            chip25.onclick = () => {
+                this.hitButton.disabled = false
+                this.standButton.disabled = false
                 this.bet += 25
                 this.player.cash -= 25
                 this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $25 and the current bet is ${this.bet}`)
-            })
+            }
 
             const chip50 = document.getElementById("chip-50")
-            chip50.addEventListener("click", () => {
+            chip50.disabled = false
+            chip50.onclick = () => {
+                this.hitButton.disabled = false
+                this.standButton.disabled = false
                 this.bet += 50
                 this.player.cash -= 50
                 this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $50 and the current bet is ${this.bet}`)
-            })
+            }
 
             const chip100 = document.getElementById("chip-100")
-            chip100.addEventListener("click", () => {
+            chip100.disabled = false
+            chip100.onclick = () => {
+                this.hitButton.disabled = false
+                this.standButton.disabled = false
                 this.bet += 100
                 this.player.cash -= 100
                 this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $100 and the current bet is ${this.bet}`)
-            })
-
+            }
 
             this.hitButton.onclick = () => {
                 // console.log("primero")
@@ -231,6 +247,7 @@ class Game {
         // the initial bet has been placed, so now the player can ask for cards
         if (this.state === "hand-started") {
             this.player.count = check_count(this.player.cards)
+            this.dealer.count = check_count(this.dealer.cards)
             // continue playing and ignore the message
             this.hitButton.onclick = () => {
 
@@ -238,6 +255,7 @@ class Game {
                 this.player.cards.push(this.cards[0])
                 this.cards.shift()
                 this.player.count = check_count(this.player.cards)
+                console.log("Player cards: ", this.player.cards, "Count: ", check_count(this.player.cards))
                 // console.log(this.player.cards, check_count(this.player.cards))
 
                 if (this.player.count > 21) {
@@ -296,27 +314,35 @@ class Game {
         // esta parte es la ultima que se tiene que programar
         // ya que se convierten en dos manos, encapsular el codigo en funciones de jugador y deleaer
         if (this.state === "hand-end") {
+
+            const cards = document.getElementsByClassName("card")
+            for (let card of cards) {
+                card.style.display = "none"
+            }
+
             console.log("player count", this.player.count)
             console.log("dealer count", this.dealer.count)
-            //
-            // if (this.player.count > this.dealer.count) {
-            //     console.log("player wins")
-            //     this.player.cash += this.bet * 2
-            //     this.dealer.cash -= this.bet * 2
-            // } else if (this.player.count < this.dealer.count) {
-            //     console.log("player wins")
-            //     this.player.cash -= this.bet * 2
-            //     this.dealer.cash += this.bet * 2
-            // } else if (this.player.count === this.dealer.count){
-            //     this.player.cash += this.bet
-            //     this.dealer.cash += this.bet
-            // }
-            //
-            // // this.dealer.cards = []
-            // // this.player.cards = []
-            // this.bet = 0
-            // console.log("hand has ended")
 
+            if (this.player.count > 21) {
+                console.log("dealer wins")
+                // this.player.cash -= this.bet * 2
+                this.dealer.cash += this.bet * 2
+            } else if (this.dealer.count > 21) {
+                console.log("player wins")
+                this.player.cash += this.bet * 2
+                this.dealer.cash -= this.bet * 2
+            } else if (this.player.count === this.dealer.count){
+                console.log("empate")
+                this.player.cash += this.bet
+                this.dealer.cash += this.bet
+            }
+
+            this.playerCash.textContent = `Player cash $${this.player.cash}`
+            this.dealer.cards = []
+            this.player.cards = []
+            this.bet = 0
+            this.state = "new-hand"
+            this.handleState()
         }
     }
 }

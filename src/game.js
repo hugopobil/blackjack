@@ -1,16 +1,11 @@
 function check_count(cards) {
     let total_count = 0
     for (let card of cards) {
-        if (card["value"] === "K" || card["value"] === "Q" || card["value"] === "J") {
-            total_count += 10
-        } else if (card["value"] === "A" && total_count <= 21) {
-            total_count += 11
-        } else if (card["value"] === "A" && total_count > 21) {
-            total_count += 1
-        } else {
-            total_count += Number(card.value)
-        }
-    }
+        console.log(card)
+        if (card["value"] === "K" || card["value"] === "Q" || card["value"] === "J") {total_count += 10}
+        else if (card["value"] === "A" && total_count <= 21) {total_count += 11}
+        else if (card["value"] === "A" && total_count > 21) {total_count += 1}
+        else {total_count += Number(card.value)}}
     return total_count
 }
 
@@ -23,20 +18,17 @@ class Game {
         this.container = container
         this.player = new Player(this.container);
         this.dealer = new Dealer(this.container);
-        this.bet = 0
+        this.bet = 50
         this.cards = cards
         this.width = this.container.offsetWidth;
         this.height = this.container.offsetHeight;
         this.x = this.container.offsetWidth
         this.y = this.container.offsetHeight;
-        this.state = "";
+        this.state = "initial-bet";
     }
 
     start() {
-        // use this cards
-        this.dealer.cards = [{suit: 'Diamonds', value: 'A'}, {suit: 'Diamonds', value: '4'}]
-
-        const bjBoard = document.getElementById("bj-board")
+        const bjBoard = document.getElementById ("bj-board")
         bjBoard.style.backgroundImage = 'url("./img/inicio_clean.png")'
 
         const playerControls = document.createElement("div")
@@ -75,7 +67,7 @@ class Game {
 
         const exitButton = document.createElement("button")
         const exitArrow = document.createElement("img")
-        exitArrow.id = "exitArrow"
+        exitArrow.id ="exitArrow"
         exitArrow.src = "./img/back-arrow.png"
         exitButton.id = "exitButton"
         exitButton.textContent = "Back"
@@ -245,6 +237,28 @@ class Game {
                 this.state = "new-hand"
             })
         }
+            // esta parte es la ultima que se tiene que programar
+            // ya que se convierten en dos manos, encapsular el codigo en funciones de jugador y deleaer
+            if (this.state === "split-hand") {
+                exitButton.disabled = false
+            }
+
+            //Muestra las cartas en pantalla en la x y la y que se la proporcionado
+            const initialLeft = 300;
+            const gap = 50;
+
+            this.dealer.cards.forEach((card, i) => {
+                const left = initialLeft + initialLeft * i + gap;
+                const cardImage = new Card(this.container, card.suit, card.value, '70px', `${left}px`);
+                cardImage.generateCards();
+            })
+
+            this.player.cards.forEach((card, i) => {
+                const left = initialLeft + initialLeft * i + gap;
+                const cardImage = new Card(this.container, card.suit, card.value, '420px', `${left}px`);
+                cardImage.generateCards();
+            })
+        });
 
     }
 }

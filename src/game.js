@@ -123,8 +123,8 @@ class Game {
             console.log(`The player has $${this.player.cash}`)
             console.log(`Current bet is $${this.bet}`)
 
-            this.hitButton.disabled = true
-            this.standButton.disabled = true
+            this.hitButton.disabled = false
+            this.standButton.disabled = false
 
             const chip5 = document.getElementById("chip-5")
             chip5.disabled = false
@@ -309,7 +309,7 @@ class Game {
                     setTimeout(() => {
                         this.state = "hand-end"
                         this.handleState()
-                    }, 2500);
+                    }, 2000);
                 }
             }
         }
@@ -361,7 +361,7 @@ class Game {
             this.playerCash.textContent = `Player cash $${this.player.cash}`
             this.dealer.cards = []
             this.player.cards = []
-            this.bet = 0
+            // this.bet = 0
             this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
             this.currentDealerCount.textContent = `Dealer count is ${check_count(this.dealer.cards)}`
             this.currentBet.textContent = `Current bet is $${this.bet}`

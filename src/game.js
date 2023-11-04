@@ -254,6 +254,17 @@ class Game {
                         cardImage.generateCards();
                     })
 
+                    const backCard = document.createElement("div")
+                    backCard.style.backgroundImage = 'url(./img/backCard.png)'
+                    backCard.classList.add('card');
+                    backCard.style.backgroundSize = "cover"
+                    backCard.style.top ='90px';
+                    backCard.style.left = "450px";
+                    backCard.style.width = "180px"
+                    backCard.style.height = "250px"
+
+                    this.container.appendChild(backCard)
+
                     this.currentDealerCount.textContent = `Dealer count is ${check_count(this.dealer.cards)}`
 
                     // TODO: Meter un div de las mismas dimensiones con la carta volteada
@@ -292,7 +303,7 @@ class Game {
                 this.cards.shift()
                 this.player.count = check_count(this.player.cards)
                 this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
-                console.log("Player cards: ", this.player.cards, "Count: ", check_count(this.player.cards))
+                console.log("Player cards: ", this.player.cards, "Count: ",check_count(this.player.cards))
                 // console.log(this.player.cards, check_count(this.player.cards))
 
                 // repetimos el proceso de generar las cartas para mostrar todas las cartas del jugador

@@ -316,7 +316,7 @@ class Game {
                 // this.handleState()
 
                 // the delear starts his hand
-                const initialLeft = 230;
+                const initialLeft = 200;
                 const gap = 50
 
                 for (let i = 0; i < 10; i++) {

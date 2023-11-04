@@ -182,22 +182,32 @@ body {
 
 #player-cash {
   height: 100px;
-  width: 350px;
+  width: auto;
   color: white;
-  font-size: 30px;
+  font-size: 20px;
   position: absolute;
   top: 55px;
-  right: 70px;
+  right: 90px;
 }
 
 #current-bet {
   position: absolute;
   height: 100px;
-  width: 350px;
+  width: auto;
   color: white;
-  font-size: 30px;
+  font-size: 20px;
   top: 95px;
-  right: 70px;
+  right: 90px;
+}
+
+#current-count {
+  position: absolute;
+  height: 100px;
+  width: auto;
+  color: white;
+  font-size: 20px;
+  top: 135px;
+  right: 90px;
 }
 
 .card {

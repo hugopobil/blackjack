@@ -39,6 +39,7 @@ class Game {
         this.exitArrow = document.createElement("img")
         this.playerCash = document.createElement("div")
         this.currentBet = document.createElement("div")
+        this.currentCount = document.createElement("div")
     }
 
     start() {
@@ -93,9 +94,15 @@ class Game {
         this.container.appendChild(this.playerCash)
 
         // CURRENT BET
+
         this.currentBet.textContent = `Current bet is $${this.bet}`
         this.currentBet.id = 'current-bet'
         this.container.appendChild(this.currentBet)
+
+        // CURRENT COUNT
+        this.currentCount.textContent = `Current player count is ${this.player.count}`
+        this.currentCount.id = "current-count"
+        this.container.appendChild(this.currentCount)
 
         // CHIP STACK
 
@@ -128,7 +135,7 @@ class Game {
     handleState() {
 
         let player_start_cards_number = 2
-        let dealer_start_cards_number = 2
+        let dealer_start_cards_number = 1
 
         if (this.state === "new-hand") {
 
@@ -218,6 +225,8 @@ class Game {
                         this.cards.shift()
                     }
 
+                    this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
+
                     for (let i = 0; i < dealer_start_cards_number; i++) {
                         this.dealer.cards.push(this.cards[0])
                         this.cards.shift()
@@ -227,18 +236,20 @@ class Game {
                     console.log("Dealer cards: ", this.dealer.cards, "Count: ", check_count(this.dealer.cards))
 
                     // Muestra las cartas en pantalla en la x y la y que se la proporcionado
-                    const initialLeft = 300;
+                    const initialLeft = 200;
                     const gap = 50;
 
                     this.dealer.cards.forEach((card, i) => {
-                        const left = initialLeft + initialLeft * i + gap;
-                        const cardImage = new Card(this.container, card.suit, card.value, '80px', `${left}px`);
+                        const left = initialLeft + initialLeft + i * gap;
+                        const cardImage = new Card(this.container, card.suit, card.value, '90px', `${left}px`);
                         cardImage.generateCards();
                     })
 
+                    // TODO: Meter un div de las mismas dimensiones con la carta volteada
+
                     this.player.cards.forEach((card, i) => {
-                        const left = initialLeft + initialLeft * i + gap;
-                        const cardImage = new Card(this.container, card.suit, card.value, '420px', `${left}px`);
+                        const left = initialLeft + initialLeft + i * gap;
+                        const cardImage = new Card(this.container, card.suit, card.value, '380px', `${left}px`);
                         cardImage.generateCards();
                     })
 
@@ -248,6 +259,8 @@ class Game {
                     //     this.dealer.cash -= (this.bet * 2) + (this.bet / 2)
                     //     this.state = "hand-end"
                     // }
+
+                    this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
 
                     this.state = "hand-started"
                     this.handleState()
@@ -259,6 +272,7 @@ class Game {
         if (this.state === "hand-started") {
             this.player.count = check_count(this.player.cards)
             this.dealer.count = check_count(this.dealer.cards)
+            this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
             // continue playing and ignore the message
             this.hitButton.onclick = () => {
 
@@ -266,8 +280,18 @@ class Game {
                 this.player.cards.push(this.cards[0])
                 this.cards.shift()
                 this.player.count = check_count(this.player.cards)
+                this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
                 console.log("Player cards: ", this.player.cards, "Count: ", check_count(this.player.cards))
                 // console.log(this.player.cards, check_count(this.player.cards))
+
+                // repetimos el proceso de generar las cartas para mostrar todas las cartas del jugador
+                const initialLeft = 200;
+                    const gap = 50;
+                this.player.cards.forEach((card, i) => {
+                        const left = initialLeft + initialLeft + i * gap;
+                        const cardImage = new Card(this.container, card.suit, card.value, '380px', `${left}px`);
+                        cardImage.generateCards();
+                    })
 
                 if (this.player.count > 21) {
                     console.log("The player has more than 21 and loses the hand")
@@ -282,6 +306,9 @@ class Game {
                 // this.handleState()
 
                 // the delear starts his hand
+                const initialLeft = 300;
+                const gap = 10
+
                 for (let i = 0; i < 10; i++) {
                     this.dealer.count = check_count(this.dealer.cards)
 
@@ -306,6 +333,11 @@ class Game {
                         this.handleState()
                         break;
                     }
+                    // this.dealer.cards.forEach((card, i) => {
+                    //     const left = initialLeft + initialLeft * i + gap;
+                    //     const cardImage = new Card(this.container, card.suit, card.value, '90px', `${left}px`);
+                    //     cardImage.generateCards();
+                    // })
                 }
             }
 
@@ -364,6 +396,7 @@ class Game {
             this.dealer.cards = []
             this.player.cards = []
             this.bet = 0
+            this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
             this.currentBet.textContent = `Current bet is $${this.bet}`
             this.state = "new-hand"
             this.handleState()

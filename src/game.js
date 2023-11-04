@@ -40,6 +40,7 @@ class Game {
         this.playerCash = document.createElement("div")
         this.currentBet = document.createElement("div")
         this.currentCount = document.createElement("div")
+        this.result_message = document.createElement("div")
     }
 
     start() {
@@ -211,6 +212,7 @@ class Game {
 
             this.hitButton.onclick = () => {
                 // console.log("primero")
+                this.result_message.textContent = ""
                 if (this.bet > 0) {
 
                     // disable all chips button
@@ -365,33 +367,40 @@ class Game {
 
             console.log("player count", this.player.count)
             console.log("dealer count", this.dealer.count)
+            this.result_message.id = "result-message"
 
             if (this.player.count > 21) {
                 console.log("dealer wins")
+                this.result_message.textContent = "Dealer wins, to play another hand start your bet"
                 // this.player.cash -= this.bet * 2
                 this.dealer.cash += this.bet
             } else if (this.dealer.count > 21) {
                 console.log("player wins")
+                this.result_message.textContent = "Player wins, to play another hand start your bet"
                 this.player.cash += this.bet * 2
                 this.dealer.cash -= this.bet * 2
             } else if (this.player.count === this.dealer.count){
                 console.log("empate")
+                this.result_message.textContent = "None wins, to play another hand start your bet"
                 this.player.cash += this.bet
                 this.dealer.cash += this.bet
             } else if (this.player.count > this.dealer.count
                 && this.player.count <= 21
                 && this.dealer.count <= 21) {
                 console.log("player wins")
+                this.result_message.textContent = "Player wins, to play another start your bet"
                 this.player.cash += this.bet * 2
                 this.dealer.cash -= this.bet
             } else if (this.player.count < this.dealer.count
                 && this.player.count <= 21
                 && this.dealer.count <= 21) {
                 console.log("dealer wins")
+                this.result_message.textContent = "Dealer wins, to play another hand start your bet"
                 // this.player.cash -= this.bet * 2
                 this.dealer.cash += this.bet
             }
 
+            this.container.appendChild(this.result_message)
             this.playerCash.textContent = `Player cash $${this.player.cash}`
             this.dealer.cards = []
             this.player.cards = []

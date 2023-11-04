@@ -210,6 +210,16 @@ body {
   right: 90px;
 }
 
+#result-message {
+  position: absolute;
+  height: 100px;
+  width: auto;
+  color: red;
+  font-size: 20px;
+  top: 175px;
+  right: 90px;
+}
+
 .card {
   width: 220px;
   height: 320px;

@@ -28,6 +28,7 @@ class Game {
         this.dealer = new Dealer(this.container);
         this.bet = 0
         this.cards = cards
+        this.spare_cards = cards
         // this.width = this.container.offsetWidth;
         // this.height = this.container.offsetHeight;
         // this.x = this.container.offsetWidth
@@ -296,7 +297,7 @@ class Game {
 
                 // repetimos el proceso de generar las cartas para mostrar todas las cartas del jugador
                 const initialLeft = 200;
-                    const gap = 50;
+                const gap = 50;
                 this.player.cards.forEach((card, i) => {
                         const left = initialLeft + initialLeft + i * gap;
                         const cardImage = new Card(this.container, card.suit, card.value, '380px', `${left}px`);
@@ -414,6 +415,10 @@ class Game {
                 this.result_message.textContent = "Dealer wins, to play another hand start your bet"
                 // this.player.cash -= this.bet * 2
                 this.dealer.cash += this.bet
+            }
+
+            if (this.cards.length === 0) {
+                this.cards = this.spare_cards
             }
 
             this.container.appendChild(this.result_message)

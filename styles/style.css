@@ -210,13 +210,23 @@ body {
   right: 90px;
 }
 
+#dealer-count {
+  position: absolute;
+  height: 100px;
+  width: auto;
+  color: white;
+  font-size: 20px;
+  top: 175px;
+  right: 90px;
+}
+
 #result-message {
   position: absolute;
   height: 100px;
   width: auto;
   color: red;
   font-size: 20px;
-  top: 175px;
+  top: 225px;
   right: 90px;
 }
 

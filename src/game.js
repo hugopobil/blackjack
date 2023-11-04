@@ -41,6 +41,7 @@ class Game {
         this.currentBet = document.createElement("div")
         this.currentCount = document.createElement("div")
         this.result_message = document.createElement("div")
+        this.currentDealerCount = document.createElement("div")
     }
 
     start() {
@@ -101,9 +102,14 @@ class Game {
         this.container.appendChild(this.currentBet)
 
         // CURRENT COUNT
-        this.currentCount.textContent = `Current player count is ${this.player.count}`
+        this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
         this.currentCount.id = "current-count"
         this.container.appendChild(this.currentCount)
+
+        // CURRENT DEALER COUNT
+        this.currentDealerCount.textContent = `Dealer count is ${check_count(this.dealer.cards)}`
+        this.currentDealerCount.id = "dealer-count"
+        this.container.appendChild(this.currentDealerCount)
 
         // CHIP STACK
 
@@ -247,6 +253,8 @@ class Game {
                         cardImage.generateCards();
                     })
 
+                    this.currentDealerCount.textContent = `Dealer count is ${check_count(this.dealer.cards)}`
+
                     // TODO: Meter un div de las mismas dimensiones con la carta volteada
 
                     this.player.cards.forEach((card, i) => {
@@ -308,21 +316,21 @@ class Game {
                 // this.handleState()
 
                 // the delear starts his hand
-                const initialLeft = 300;
-                const gap = 10
+                const initialLeft = 230;
+                const gap = 50
 
                 for (let i = 0; i < 10; i++) {
                     this.dealer.count = check_count(this.dealer.cards)
 
                     if (this.dealer.count === 21) {
                         console.log("dealer wins")
-                        this.state = "hand-end"
-                        this.handleState()
+                        // this.state = "hand-end"
+                        // this.handleState()
                         break;
                     } else if (this.dealer.count <= 21 && this.dealer.count >= 17) {
-                        console.log("dealer stand")
-                        this.state = "hand-end"
-                        this.handleState()
+                        // console.log("dealer stand")
+                        // this.state = "hand-end"
+                        // this.handleState()
                         break;
                     } else if (this.dealer.count < 21) {
                         console.log("dealer plays")
@@ -330,16 +338,24 @@ class Game {
                         this.cards.shift()
                         this.dealer.count = check_count(this.dealer.cards)
                     } else if (this.dealer.count > 21) {
-                        console.log("dealer loses")
-                        this.state = "hand-end"
-                        this.handleState()
+                        // console.log("dealer loses")
+                        // this.state = "hand-end"
+                        // this.handleState()
                         break;
                     }
-                    // this.dealer.cards.forEach((card, i) => {
-                    //     const left = initialLeft + initialLeft * i + gap;
-                    //     const cardImage = new Card(this.container, card.suit, card.value, '90px', `${left}px`);
-                    //     cardImage.generateCards();
-                    // })
+                    this.currentDealerCount.textContent = `Dealer count is ${check_count(this.dealer.cards)}`
+
+                    this.dealer.cards.forEach((card, i) => {
+                        const left = initialLeft + initialLeft + i * gap;
+                        const cardImage = new Card(this.container, card.suit, card.value, '90px', `${left}px`);
+                        cardImage.generateCards();
+                    })
+
+                    setTimeout(() => {
+                        this.state = "hand-end"
+                        this.handleState()
+                    }, 3000);
+
                 }
             }
 
@@ -406,6 +422,7 @@ class Game {
             this.player.cards = []
             this.bet = 0
             this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
+            this.currentDealerCount.textContent = `Dealer count is ${check_count(this.dealer.cards)}`
             this.currentBet.textContent = `Current bet is $${this.bet}`
             this.state = "new-hand"
             this.handleState()

@@ -38,6 +38,7 @@ class Game {
         this.exitButton = document.createElement("button")
         this.exitArrow = document.createElement("img")
         this.playerCash = document.createElement("div")
+        this.currentBet = document.createElement("div")
     }
 
     start() {
@@ -91,6 +92,11 @@ class Game {
         this.playerCash.id = "player-cash"
         this.container.appendChild(this.playerCash)
 
+        // CURRENT BET
+        this.currentBet.textContent = `Current bet is $${this.bet}`
+        this.currentBet.id = 'current-bet'
+        this.container.appendChild(this.currentBet)
+
         // CHIP STACK
 
         const chipsStack = document.createElement("div")
@@ -142,6 +148,7 @@ class Game {
                 this.hitButton.disabled = false
                 this.standButton.disabled = false
                 this.bet += 5
+                this.currentBet.textContent = `Current bet is $${this.bet}`
                 this.player.cash -= 5
                 this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $5 and the current bet is ${this.bet}`)
@@ -153,6 +160,7 @@ class Game {
                 this.hitButton.disabled = false
                 this.standButton.disabled = false
                 this.bet += 10
+                this.currentBet.textContent = `Current bet is $${this.bet}`
                 this.player.cash -= 10
                 this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $10 and the current bet is ${this.bet}`)
@@ -164,6 +172,7 @@ class Game {
                 this.hitButton.disabled = false
                 this.standButton.disabled = false
                 this.bet += 25
+                this.currentBet.textContent = `Current bet is $${this.bet}`
                 this.player.cash -= 25
                 this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $25 and the current bet is ${this.bet}`)
@@ -175,6 +184,7 @@ class Game {
                 this.hitButton.disabled = false
                 this.standButton.disabled = false
                 this.bet += 50
+                this.currentBet.textContent = `Current bet is $${this.bet}`
                 this.player.cash -= 50
                 this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $50 and the current bet is ${this.bet}`)
@@ -186,6 +196,7 @@ class Game {
                 this.hitButton.disabled = false
                 this.standButton.disabled = false
                 this.bet += 100
+                this.currentBet.textContent = `Current bet is $${this.bet}`
                 this.player.cash -= 100
                 this.playerCash.textContent = `Player cash $${this.player.cash}`
                 console.log(`The player has bet $100 and the current bet is ${this.bet}`)
@@ -353,6 +364,7 @@ class Game {
             this.dealer.cards = []
             this.player.cards = []
             this.bet = 0
+            this.currentBet.textContent = `Current bet is $${this.bet}`
             this.state = "new-hand"
             this.handleState()
         }

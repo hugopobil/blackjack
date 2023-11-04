@@ -9,12 +9,20 @@ class howToPlay {
 
     display() {
 
+        const bjBoard = document.getElementById("bj-board")
+        bjBoard.style.backgroundImage = 'url("./img/inicio_clean.png")'
+
         const instruction_title = document.createElement("h1")
         instruction_title.id = "instructions-title"
         const instruction_text = document.createElement("p")
-        instruction_text.id = "instructions-text"
+        instruction_text.className = "instructions-text"
         const returnButton = document.createElement("button")
         returnButton.id = "instructions-return-button"
+
+        const instruction_text_2 = document.createElement("div")
+        const instruction_text_3 = document.createElement("div")
+        instruction_text_2.className = "instructions-text"
+        instruction_text_3.className = "instructions-text"
 
         instruction_title.textContent = "Objective of BlackJack"
 
@@ -30,10 +38,17 @@ class howToPlay {
             Your hand value exceeds 21. \
             The dealer's hand has a greater value than yours at the end of the round"
 
+        instruction_text_2.textContent =
+            "Hit Button: Ask for cards"
+        instruction_text_3.textContent =
+            "Stand Button: Hold your hand"
+
         returnButton.textContent = "Return"
 
         this.container.appendChild(instruction_title)
         this.container.appendChild(instruction_text)
+        this.container.appendChild(instruction_text_2)
+        this.container.appendChild(instruction_text_3)
         this.container.appendChild(returnButton)
 
         returnButton.addEventListener("click", () => {

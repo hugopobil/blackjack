@@ -52,21 +52,6 @@ const cards = [
   { suit: 'Spades', value: 'K' },
   { suit: 'Spades', value: 'A' }
 ]
-const testingCards = [
-  { suit: 'Diamonds', value: 'A' },
-  { suit: 'Diamonds', value: '10' },
-  { suit: 'Diamonds', value: 'J' },
-  { suit: 'Diamonds', value: 'Q' },
-  { suit: 'Hearts', value: '7' },
-  { suit: 'Hearts', value: '8' },
-  { suit: 'Hearts', value: '9' },
-  { suit: 'Clubs', value: '2' },
-  { suit: 'Clubs', value: 'K' },
-  { suit: 'Clubs', value: 'A' },
-  { suit: 'Spades', value: '3' },
-  { suit: 'Spades', value: '4' },
-  { suit: 'Spades', value: 'A' }
-]
 
 // Mezclar las cartas aqui y pasarlas ya mezcladas
 function shuffleArray(array) {
@@ -77,8 +62,6 @@ function shuffleArray(array) {
   return array
 }
 
-// con esto damos inicio al juego, cuando se carga la pagina:
-// Barajar cartas y pasarselas al juego
 window.addEventListener("load", () => {
   const container = document.getElementById("bj-board");
   const newGameButton = document.createElement("button")
@@ -102,10 +85,9 @@ window.addEventListener("load", () => {
   container.appendChild(newGameButton)
   container.appendChild(howToPlayButton)
 
-  // let totalCards = shuffleArray(cards)
-  //     .concat(shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards))
-  //
   let totalCards = shuffleArray(cards)
+      .concat(shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards), shuffleArray(cards))
+
 
   newGameButton.addEventListener("click" , () => {
     welcomeMessage.remove()

@@ -1,8 +1,9 @@
+// GAME
+// funcion para calcular la cuenta total de las cartas del jugador y dealer segun el palo y el rango
 function check_count(cards) {
     let total_count = 0
 
     for (let card of cards) {
-        // console.log(card)
         if (card["value"] === "K" || card["value"] === "Q" || card["value"] === "J") {
             total_count += 10
         } else if (card["value"] === "A" && total_count <= 21) {
@@ -13,14 +14,13 @@ function check_count(cards) {
             total_count += Number(card.value)
         }
     }
-    // console.log({  cards, total_count })
     return total_count
 }
 
-// colores
+// variable de color para los botones del juego
 const color_botones_jugador_activado = "green"
-const color_botones_jugador_desactivado = "darkred"
 
+// clase juego
 class Game {
     constructor(cards, container) {
         this.container = container
@@ -29,10 +29,6 @@ class Game {
         this.bet = 0
         this.cards = cards
         this.spare_cards = cards
-        // this.width = this.container.offsetWidth;
-        // this.height = this.container.offsetHeight;
-        // this.x = this.container.offsetWidth
-        // this.y = this.container.offsetHeight;
         this.state = "new-hand";
         this.hitButton = document.createElement("button")
         this.standButton = document.createElement("button")
@@ -53,7 +49,6 @@ class Game {
         playerControls.id = "player-controls"
         this.container.appendChild(playerControls)
 
-
         this.hitButton.className = "playerButton"
         this.hitButton.textContent = "Hit"
         playerControls.appendChild(this.hitButton)
@@ -64,25 +59,6 @@ class Game {
         playerControls.appendChild(this.standButton)
         this.standButton.style.backgroundColor = color_botones_jugador_activado
 
-        // const doubleButton = document.createElement("button")
-        // doubleButton.className = "playerButton"
-        // doubleButton.textContent = "Double"
-        // // playerControls.appendChild(doubleButton)
-        // doubleButton.style.backgroundColor = color_botones_jugador_activado
-        //
-        // const splitButton = document.createElement("button")
-        // splitButton.className = "playerButton"
-        // splitButton.textContent = "Split"
-        // // playerControls.appendChild(splitButton)
-        // splitButton.style.backgroundColor = color_botones_jugador_activado
-        //
-        // const surrenderButton = document.createElement("button")
-        // surrenderButton.className = "playerButton"
-        // surrenderButton.textContent = "Surrender"
-        // // playerControls.appendChild(surrenderButton)
-        // surrenderButton.style.backgroundColor = color_botones_jugador_activado
-
-
         this.exitArrow.id = "exitArrow"
         this.exitArrow.src = "./img/back-arrow.png"
         this.exitButton.id = "exitButton"
@@ -91,13 +67,11 @@ class Game {
         this.container.appendChild(this.exitButton)
 
         // PLAYER CASH
-
         this.playerCash.textContent = `Player cash $${this.player.cash}`
         this.playerCash.id = "player-cash"
         this.container.appendChild(this.playerCash)
 
         // CURRENT BET
-
         this.currentBet.textContent = `Current bet is $${this.bet}`
         this.currentBet.id = 'current-bet'
         this.container.appendChild(this.currentBet)
@@ -113,7 +87,6 @@ class Game {
         this.container.appendChild(this.currentDealerCount)
 
         // CHIP STACK
-
         const chipsStack = document.createElement("div")
         chipsStack.id = "chips-stack"
         this.container.appendChild(chipsStack)
@@ -150,12 +123,8 @@ class Game {
             console.log(`The player has $${this.player.cash}`)
             console.log(`Current bet is $${this.bet}`)
 
-            // disable the rest of the buttons
             this.hitButton.disabled = true
             this.standButton.disabled = true
-            // this.doubleButton.disabled = true
-            // splitButton.disabled = true
-            // surrenderButton.disabled = true
 
             const chip5 = document.getElementById("chip-5")
             chip5.disabled = false
@@ -218,7 +187,6 @@ class Game {
             }
 
             this.hitButton.onclick = () => {
-                // console.log("primero")
                 this.result_message.textContent = ""
                 if (this.bet > 0) {
 
@@ -262,12 +230,9 @@ class Game {
                     backCard.style.left = "450px";
                     backCard.style.width = "180px"
                     backCard.style.height = "250px"
-
                     this.container.appendChild(backCard)
 
                     this.currentDealerCount.textContent = `Dealer count is ${check_count(this.dealer.cards)}`
-
-                    // TODO: Meter un div de las mismas dimensiones con la carta volteada
 
                     this.player.cards.forEach((card, i) => {
                         const left = initialLeft + initialLeft + i * gap;
@@ -275,15 +240,7 @@ class Game {
                         cardImage.generateCards();
                     })
 
-                    // if (this.player.count === 21) {
-                    //     console.log("Player has 21 and wins the hand")
-                    //     this.player.cash += (this.bet * 2) + (this.bet / 2)
-                    //     this.dealer.cash -= (this.bet * 2) + (this.bet / 2)
-                    //     this.state = "hand-end"
-                    // }
-
                     this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
-
                     this.state = "hand-started"
                     this.handleState()
                 }
@@ -295,7 +252,7 @@ class Game {
             this.player.count = check_count(this.player.cards)
             this.dealer.count = check_count(this.dealer.cards)
             this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
-            // continue playing and ignore the message
+
             this.hitButton.onclick = () => {
 
                 // give the player a new card
@@ -304,7 +261,6 @@ class Game {
                 this.player.count = check_count(this.player.cards)
                 this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
                 console.log("Player cards: ", this.player.cards, "Count: ",check_count(this.player.cards))
-                // console.log(this.player.cards, check_count(this.player.cards))
 
                 // repetimos el proceso de generar las cartas para mostrar todas las cartas del jugador
                 const initialLeft = 200;
@@ -322,12 +278,7 @@ class Game {
                 }
             }
 
-            // stand button
             this.standButton.onclick = () => {
-                // this.state = "player-stand"
-                // this.handleState()
-
-                // the delear starts his hand
                 const initialLeft = 200;
                 const gap = 50
 
@@ -336,13 +287,8 @@ class Game {
 
                     if (this.dealer.count === 21) {
                         console.log("dealer wins")
-                        // this.state = "hand-end"
-                        // this.handleState()
                         break;
                     } else if (this.dealer.count <= 21 && this.dealer.count >= 17) {
-                        // console.log("dealer stand")
-                        // this.state = "hand-end"
-                        // this.handleState()
                         break;
                     } else if (this.dealer.count < 21) {
                         console.log("dealer plays")
@@ -350,9 +296,6 @@ class Game {
                         this.cards.shift()
                         this.dealer.count = check_count(this.dealer.cards)
                     } else if (this.dealer.count > 21) {
-                        // console.log("dealer loses")
-                        // this.state = "hand-end"
-                        // this.handleState()
                         break;
                     }
                     this.currentDealerCount.textContent = `Dealer count is ${check_count(this.dealer.cards)}`
@@ -366,28 +309,12 @@ class Game {
                     setTimeout(() => {
                         this.state = "hand-end"
                         this.handleState()
-                    }, 3000);
-
+                    }, 2500);
                 }
             }
-
-            // surrender and end current hand
-            // surrenderButton.addEventListener("click", () => {
-            //     console.log("Player surrenders")
-            //
-            //     let value_to_return = this.bet / 2
-            //     this.player.cash += value_to_return
-            //     this.dealer.cash += value_to_return
-            //     this.bet = 0
-            //
-            //     this.state = "new-hand"
-            // })
-
         }
-        // esta parte es la ultima que se tiene que programar
-        // ya que se convierten en dos manos, encapsular el codigo en funciones de jugador y deleaer
-        if (this.state === "hand-end") {
 
+        if (this.state === "hand-end") {
             const cards = document.getElementsByClassName("card")
             for (let card of cards) {
                 card.style.display = "none"
@@ -400,7 +327,6 @@ class Game {
             if (this.player.count > 21) {
                 console.log("dealer wins")
                 this.result_message.textContent = "Dealer wins, to play another hand start your bet"
-                // this.player.cash -= this.bet * 2
                 this.dealer.cash += this.bet
             } else if (this.dealer.count > 21) {
                 console.log("player wins")
@@ -424,7 +350,6 @@ class Game {
                 && this.dealer.count <= 21) {
                 console.log("dealer wins")
                 this.result_message.textContent = "Dealer wins, to play another hand start your bet"
-                // this.player.cash -= this.bet * 2
                 this.dealer.cash += this.bet
             }
 

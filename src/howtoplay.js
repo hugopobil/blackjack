@@ -1,10 +1,6 @@
 class howToPlay {
     constructor(container) {
         this.container = container
-        this.width = 150;
-        this.height = 100;
-        this.x = 10;
-        this.y = 10;
     }
 
     display() {

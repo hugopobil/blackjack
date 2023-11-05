@@ -33,13 +33,14 @@ class Game {
         this.hitButton = document.createElement("button")
         this.standButton = document.createElement("button")
         this.exitButton = document.createElement("button")
+        this.resetBetButton = document.createElement("button")
+        this.doubleButton = document.createElement("button")
         this.exitArrow = document.createElement("img")
         this.playerCash = document.createElement("div")
         this.currentBet = document.createElement("div")
         this.currentCount = document.createElement("div")
         this.result_message = document.createElement("div")
         this.currentDealerCount = document.createElement("div")
-        this.resetBetButton = document.createElement("button")
     }
 
     start() {
@@ -59,6 +60,11 @@ class Game {
         this.standButton.textContent = "Stand"
         playerControls.appendChild(this.standButton)
         this.standButton.style.backgroundColor = color_botones_jugador_activado
+
+        this.doubleButton.className = "playerButton"
+        this.doubleButton.textContent = "Double"
+        playerControls.appendChild(this.doubleButton)
+        this.doubleButton.style.backgroundColor = color_botones_jugador_activado
 
         this.exitArrow.id = "exitArrow"
         this.exitArrow.src = "./img/back-arrow.png"
@@ -199,6 +205,9 @@ class Game {
                 this.result_message.textContent = ""
                 if (this.bet > 0) {
 
+                    this.player.cash -= this.bet
+                    this.playerCash.textContent = `Player cash $${this.player.cash}`
+
                     // disable all chips button
                     chip5.disabled = true
                     chip10.disabled = true
@@ -256,14 +265,17 @@ class Game {
             }
 
             this.resetBetButton.onclick = () => {
+                this.player.cash += this.bet
                 this.bet = 0;
                 this.currentBet.textContent = `Current bet is $${this.bet}`
+                this.playerCash.textContent = `Player cash $${this.player.cash}`
 
             }
         }
 
         // the initial bet has been placed, so now the player can ask for cards
         if (this.state === "hand-started") {
+            this.doubleButton.disabled = false
             this.player.count = check_count(this.player.cards)
             this.dealer.count = check_count(this.dealer.cards)
             this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
@@ -290,6 +302,60 @@ class Game {
                     console.log("The player has more than 21 and loses the hand")
                     this.state = "hand-end"
                     this.handleState()
+                }
+            }
+
+            this.doubleButton.onclick = () => {
+                // the player only receives one card and the bet doubles
+                this.currentBet.textContent = `Current bet is $${this.bet * 2}`
+                this.player.cash -= this.bet
+                this.player.cards.push(this.cards[0])
+                this.cards.shift()
+
+                // check the new count
+                this.player.count = check_count(this.player.cards)
+                this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
+
+                const initialLeft = 200;
+                const gap = 50;
+                this.player.cards.forEach((card, i) => {
+                        const left = initialLeft + initialLeft + i * gap;
+                        const cardImage = new Card(this.container, card.suit, card.value, '380px', `${left}px`);
+                        cardImage.generateCards();
+                    })
+
+                this.doubleButton.disabled = true
+
+                // dealer automatically starts his hand
+                for (let i = 0; i < 10; i++) {
+                    this.dealer.count = check_count(this.dealer.cards)
+
+                    if (this.dealer.count === 21) {
+                        console.log("dealer wins")
+                        break;
+                    } else if (this.dealer.count <= 21 && this.dealer.count >= 17) {
+                        break;
+                    } else if (this.dealer.count < 21) {
+                        console.log("dealer plays")
+                        this.dealer.cards.push(this.cards[0])
+                        this.cards.shift()
+                        this.dealer.count = check_count(this.dealer.cards)
+                    } else if (this.dealer.count > 21) {
+                        break;
+                    }
+                    this.currentDealerCount.textContent = `Dealer count is ${check_count(this.dealer.cards)}`
+
+                    this.dealer.cards.forEach((card, i) => {
+                        const left = initialLeft + initialLeft + i * gap;
+                        const cardImage = new Card(this.container, card.suit, card.value, '90px', `${left}px`);
+                        cardImage.generateCards();
+                    })
+
+                    setTimeout(() => {
+                        this.state = "hand-end"
+                        this.handleState()
+                    }, 2000);
+
                 }
             }
 

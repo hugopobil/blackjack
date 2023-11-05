@@ -39,6 +39,7 @@ class Game {
         this.currentCount = document.createElement("div")
         this.result_message = document.createElement("div")
         this.currentDealerCount = document.createElement("div")
+        this.resetBetButton = document.createElement("button")
     }
 
     start() {
@@ -105,6 +106,13 @@ class Game {
             coloredChip.style.borderStyle = "none";
         }
 
+        //Reset bet button
+        this.resetBetButton.className = "resetBetButton"
+        this.resetBetButton.textContent = "Reset"
+        bjBoard.appendChild(this.resetBetButton)
+        this.resetBetButton.style.backgroundColor = color_botones_jugador_activado
+
+
         // The player can always exit the game, at any given point
         this.exitButton.addEventListener("click", () => {
             window.location.reload()
@@ -125,6 +133,7 @@ class Game {
 
             this.hitButton.disabled = false
             this.standButton.disabled = false
+            this.resetBetButton.disabled = false
 
             const chip5 = document.getElementById("chip-5")
             chip5.disabled = false
@@ -244,6 +253,12 @@ class Game {
                     this.state = "hand-started"
                     this.handleState()
                 }
+            }
+
+            this.resetBetButton.onclick = () => {
+                this.bet = 0;
+                this.currentBet.textContent = `Current bet is $${this.bet}`
+
             }
         }
 

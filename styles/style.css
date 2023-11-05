@@ -135,6 +135,17 @@ body {
   gap: 13px;
 }
 
+.resetBetButton{
+position:absolute;
+bottom:70px;
+right: 180px;
+height:60px;
+width:120px;
+border-radius: 10px;
+color: white;
+font-size: 30px;
+}
+
 .playerButton {
   height: 100%;
   font-size: 30px;

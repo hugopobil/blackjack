@@ -17,8 +17,10 @@ class howToPlay {
 
         const instruction_text_2 = document.createElement("div")
         const instruction_text_3 = document.createElement("div")
+        const instruction_text_4 = document.createElement("div")
         instruction_text_2.className = "instructions-text"
         instruction_text_3.className = "instructions-text"
+        instruction_text_4.className = "instructions-text"
 
         instruction_title.textContent = "Objective of BlackJack"
 
@@ -38,6 +40,8 @@ class howToPlay {
             "Hit Button: Ask for cards"
         instruction_text_3.textContent =
             "Stand Button: Hold your hand"
+        instruction_text_4.textContent =
+            "Double Button: Double your bet and hit only once"
 
         returnButton.textContent = "Return"
 
@@ -45,6 +49,7 @@ class howToPlay {
         this.container.appendChild(instruction_text)
         this.container.appendChild(instruction_text_2)
         this.container.appendChild(instruction_text_3)
+        this.container.appendChild(instruction_text_4)
         this.container.appendChild(returnButton)
 
         returnButton.addEventListener("click", () => {

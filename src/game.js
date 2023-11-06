@@ -41,7 +41,6 @@ class Game {
         this.currentCount = document.createElement("div")
         this.result_message = document.createElement("div")
         this.currentDealerCount = document.createElement("div")
-        this.current_betting = false
     }
 
     start() {
@@ -142,11 +141,6 @@ class Game {
 
             console.log(`The player has $${this.player.cash}`)
             console.log(`Current bet is $${this.bet}`)
-
-
-            this.hitButton.disabled = false
-            this.standButton.disabled = false
-            this.resetBetButton.disabled = false
 
             const chip5 = document.getElementById("chip-5")
             chip5.disabled = false
@@ -449,7 +443,7 @@ class Game {
             this.playerCash.textContent = `Player cash $${this.player.cash}`
             this.dealer.cards = []
             this.player.cards = []
-            // this.bet = 0
+            this.bet = 0
             this.currentCount.textContent = `Current player count is ${check_count(this.player.cards)}`
             this.currentDealerCount.textContent = `Dealer count is ${check_count(this.dealer.cards)}`
             this.currentBet.textContent = `Current bet is $${this.bet}`

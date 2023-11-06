@@ -138,7 +138,8 @@ class Game {
             console.log(`Current bet is $${this.bet}`)
 
             this.hitButton.disabled = false
-            this.standButton.disabled = false
+            this.standButton.disabled = true
+            this.doubleButton.disabled = true
             this.resetBetButton.disabled = false
 
             const chip5 = document.getElementById("chip-5")
@@ -275,6 +276,7 @@ class Game {
 
         // the initial bet has been placed, so now the player can ask for cards
         if (this.state === "hand-started") {
+            this.resetBetButton.disabled = true
             this.doubleButton.disabled = false
             this.player.count = check_count(this.player.cards)
             this.dealer.count = check_count(this.dealer.cards)

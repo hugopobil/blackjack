@@ -134,6 +134,8 @@ class Game {
 
         if (this.state === "new-hand") {
 
+            this.resetBetButton.disabled = false
+
             if (this.player.cash < 0) {
                 console.log("the game has ended, player has no cash")
                 window.location.reload()
@@ -269,7 +271,6 @@ class Game {
                 this.bet = 0;
                 this.currentBet.textContent = `Current bet is $${this.bet}`
                 this.playerCash.textContent = `Player cash $${this.player.cash}`
-
             }
         }
 

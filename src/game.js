@@ -41,6 +41,7 @@ class Game {
         this.currentCount = document.createElement("div")
         this.result_message = document.createElement("div")
         this.currentDealerCount = document.createElement("div")
+        this.current_betting = false
     }
 
     start() {
@@ -134,8 +135,14 @@ class Game {
 
         if (this.state === "new-hand") {
 
+            if (this.player.cash < 0) {
+                console.log("the game has ended, player has no cash")
+                window.location.reload()
+            }
+
             console.log(`The player has $${this.player.cash}`)
             console.log(`Current bet is $${this.bet}`)
+
 
             this.hitButton.disabled = false
             this.standButton.disabled = false
@@ -205,7 +212,6 @@ class Game {
                 this.result_message.textContent = ""
                 if (this.bet > 0) {
 
-                    this.player.cash -= this.bet
                     this.playerCash.textContent = `Player cash $${this.player.cash}`
 
                     // disable all chips button
@@ -309,6 +315,7 @@ class Game {
                 // the player only receives one card and the bet doubles
                 this.currentBet.textContent = `Current bet is $${this.bet * 2}`
                 this.player.cash -= this.bet
+                this.playerCash.textContent = `Player cash $${this.player.cash}`
                 this.player.cards.push(this.cards[0])
                 this.cards.shift()
 

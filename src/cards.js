@@ -21,11 +21,11 @@ class Card {
 
         const suitImage = document.createElement('img');
         suitImage.classList.add('suit');
-        suitImage.src = `./img/${this.suit}.png`;
+        suitImage.src = `../img/${this.suit}.png`;
 
         const suitImageSmall = document.createElement('img');
         suitImageSmall.classList.add('suit-small');
-        suitImageSmall.src = `./img/${this.suit}.png`;
+        suitImageSmall.src = `../img/${this.suit}.png`;
 
         const rankTextTop = document.createElement('div');
         rankTextTop.classList.add('rank');
